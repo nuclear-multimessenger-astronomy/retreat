@@ -1,0 +1,274 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=2.6cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{parskip}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!50!black,
+    citecolor=blue!50!black,
+    urlcolor=blue!50!black
+}
+
+\newcommand{\code}[1]{\texttt{#1}}
+
+\title{\vspace{-1.5cm}Beyond Nested Sampling: A Survey of Samplers for\\ Multimessenger Bayesian Inference\\[4pt]
+\large Research notes for the NMMA / retreat discussion}
+\author{Prepared with Claude Code (research assistant), for Thibeau Wouters}
+\date{September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+NMMA performs joint Bayesian inference over gravitational-wave (GW), electromagnetic
+(kilonova/GRB) and nuclear equation-of-state (EOS) data by wrapping \code{bilby} around
+nested samplers (\code{pymultinest} by default, plus \code{dynesty} and \code{ultranest}).
+This note surveys (i) which other codes in the multimessenger/nuclear-astrophysics space
+solve structurally similar problems, whether they are open source, and which samplers they
+use, and (ii) what neighbouring and more distant Bayesian-computation communities facing
+high-dimensional, expensive-likelihood inference have already adopted, with performance
+numbers checked directly against each paper's own \LaTeX{} source rather than quoted from
+abstracts. Headline finding: essentially the entire multimessenger/nuclear-EOS ecosystem
+(NMMA, bajes, redback, NEoST, the nonparametric-EOS lineage) still relies on the same
+CPU-bound nested-sampling engines, while the pure-GW subfield next door has already moved to
+GPU-native, gradient-based or amortized samplers with verified $5\times$ to
+$\sim\!400\times$ wall-clock reductions on problems of comparable or higher dimensionality
+--- including two pieces of work the group itself has already co-authored. This is a
+concrete, low-risk opportunity, not a hypothetical one.
+\end{abstract}
+
+\section{The starting point: how NMMA samples today}
+
+A direct inspection of the NMMA source
+(\url{https://github.com/nuclear-multimessenger-astronomy/nmma}) confirms the following,
+rather than assuming it from the papers alone:
+
+\begin{itemize}
+\item NMMA's inference stack is built on \code{bilby}~\cite{Ashton:2018jfp}, following the
+original and updated NMMA methodology papers~\cite{Coughlin:2018fis,Pang:2022rzc}, with an
+extended framework paper released this year~\cite{Rose:2026cnm}. All of its supported
+samplers are CPU-bound nested samplers: \code{pymultinest} is the CLI default (MultiNest,
+\cite{Feroz:2008xx}), \code{dynesty}~\cite{Speagle:2019ivv} is a core dependency, and
+\code{ultranest}~\cite{Buchner:2021cql} ships as an optional extra
+(\code{nmma/core/parsing.py}, \code{pyproject.toml}).
+\item EOS inference solves the Tolman--Oppenheimer--Volkoff equations directly inside the
+likelihood: \code{nmma/eos/tov.py} integrates the stellar-structure ODEs with
+\code{scipy.integrate.solve\_ivp} for \emph{every} sampled EOS, at every mass on the mass
+grid, on every likelihood call --- no caching, surrogate, or amortization across samples.
+\item Parallelism is handled purely at the level of MPI across independent likelihood
+evaluations (\code{nmma/core/mpi\_setup.py}): more CPU workers, not GPU or
+gradient-based acceleration.
+\end{itemize}
+
+This is a reasonable default: nested sampling is robust to multimodality, needs no
+gradients, and directly returns the Bayesian evidence NMMA needs for model selection between
+EOS families or kilonova/GRB models. The cost is that nested sampling's live-point evolution
+requires $\mathcal{O}(10^5\text{--}10^7)$ likelihood evaluations per run, growing with
+dimensionality and with the correlation length of the target. When the likelihood is itself
+slow --- GW waveform generation, an on-the-fly TOV solve, a kilonova/GRB light-curve
+evaluation --- the sampler's evaluation count directly sets the wall-clock budget, and joint
+multimessenger analyses stack several such slow likelihoods (and their parameters) at once.
+This compounds exactly where NMMA's science ambitions (more sources, more parameters,
+next-generation-detector sensitivities) are pushing hardest.
+
+\section{Who else samples multimessenger sources, and how?}
+
+Searching INSPIRE-HEP for codes and papers performing Bayesian parameter estimation on GW,
+EM-transient, or EOS data in a way structurally comparable to NMMA turns up a small,
+well-defined set of tools, summarized in Table~\ref{tab:codes}.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{@{}p{2.3cm}p{2.0cm}p{1.1cm}p{3.9cm}p{3.9cm}@{}}
+\toprule
+\textbf{Code} & \textbf{Reference} & \textbf{Open?} & \textbf{Sampler(s)} & \textbf{Scope} \\
+\midrule
+NMMA & \cite{Coughlin:2018fis,Pang:2022rzc,Rose:2026cnm} & Y & pymultinest, dynesty, ultranest (via bilby) & Joint GW+EM+EOS \\
+bajes & \cite{Breschi:2021wzr,Breschi:2024qlc} & Y & dynesty (previously cpnest) & Joint GW+kilonova \\
+NEoST & \cite{Raaijmakers:2025hbz} & Y & Nested sampling (MultiNest/dynesty-family) & EOS from NICER+GW \\
+Nonparametric EOS (GP/spectral) & \cite{Landry:2020vaw,Legred:2021hdx,Finch:2025bao,Ng:2025wdj} & Mixed & Nested/importance/rejection sampling over GP-drawn EOS priors & EOS from GW(+EM) \\
+redback & \cite{Sarin:2023khf} & Y & dynesty (default), pymultinest, nestle (via bilby, 16 samplers total) & EM transients only (kilonova, GRB, SN) \\
+MOSFiT & \cite{Guillochon:2017bmg} & Y & emcee (ensemble MCMC) & EM transients only \\
+\midrule
+jim / flowMC & \cite{Wong:2023lgb,Wong:2022xvh} & Y & Normalizing-flow-enhanced MCMC (JAX/GPU) & GW only \\
+GPU nested sampling & \cite{Yallup:2026nqc} & Y & Nested sampling, GPU-vectorized Slice-within-Gibbs & GW only \\
+dingo & \cite{Dax:2021tsq,Dax:2022pxd} & Y & Amortized neural posterior estimation & GW only \\
+nessai & \cite{Williams:2021qyt,Williams:2023ppp} & Y & Nested sampling with normalizing-flow proposals & GW only \\
+\bottomrule
+\end{tabular}
+\caption{Codes performing Bayesian inference on multimessenger-adjacent sources. The top
+block is directly comparable to NMMA's problem class (multi-channel or EOS inference); the
+bottom block is GW-only but included because it is the same likelihood family (compact-binary
+waveform models) and shows what happens once nested sampling is accelerated or replaced.}
+\label{tab:codes}
+\end{table}
+
+Two observations stand out. First, \textbf{bajes}~\cite{Breschi:2021wzr,Breschi:2024qlc} is
+the closest thing to a genuine NMMA competitor: it performs joint, coherent GW+kilonova
+inference, is open source, and --- checked directly in the source of its 2024 joint-inference
+paper --- uses the \code{dynesty} nested sampler (having used \code{cpnest} in earlier work).
+No open-source code was found that performs joint GW+EM+\emph{EOS} inference together the way
+NMMA does; NEoST and the Landry/Essick/Legred/Chatziioannou nonparametric-EOS lineage handle
+the EOS side alone. Second, and more importantly, \textbf{every one of these
+directly-comparable codes is built on nested sampling}: dynesty, MultiNest, cpnest, or
+nestle. The multimessenger and nuclear-EOS subfield has not yet adopted any of the
+alternatives described in Section~\ref{sec:crosscult}, even though the pure-GW subfield next
+door already has.
+
+\section{Where the neighbouring GW community has already moved, with numbers}
+\label{sec:crosscult}
+
+The most relevant lesson does not require leaving gravitational-wave astronomy at all: GW
+parameter estimation has the same likelihood structure as NMMA's GW branch (an expensive,
+smooth, differentiable-in-principle waveform likelihood over $\sim$10--15 parameters), and it
+has already been substantially accelerated away from plain CPU-bound nested sampling. Every
+number below was checked directly against the paper's own \LaTeX{} source (fetched via
+\code{arxiv.org/e-print} and grepped), not taken from an abstract.
+
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{jim / flowMC}~\cite{Wong:2023lgb,Wong:2022xvh}: a JAX-based, GPU-native,
+normalizing-flow-enhanced MCMC sampler. Verified in the jim paper's source: for GW150914 and
+GW170817, jim produces $\sim$2500 and $\sim$3500 effective samples respectively, with a total
+wall time on a single NVIDIA A100 GPU of \textbf{$\sim$3 minutes}, of which only $\sim$40\,s
+is the actual sampling (the rest is one-off JIT-compilation overhead). The same paper reports
+the equivalent \code{parallel-bilby}~\cite{Talbot:2019okv}+\code{dynesty} run, executed on
+\textbf{400 Intel Skylake CPU cores}, taking $\sim$2\,h for GW150914 and $\sim$1\,day for
+GW170817. That is a $\gtrsim\!40\times$ to $\gtrsim\!400\times$ wall-clock reduction using one
+GPU instead of hundreds of CPU cores, on the same data and priors.
+\item \textbf{GPU-native nested sampling}~\cite{Yallup:2026nqc} (co-authored within the
+group): rather than replacing nested sampling, this keeps the algorithm and its evidence
+output exactly as-is and instead re-implements its inner Slice-within-Gibbs kernel to run
+vectorized on GPU, batching waveform generation across chains. Verified directly in the
+paper's abstract and body: for \emph{full-duration, uncompressed} long binary-neutron-star
+signals across a three-detector network --- the exact signal class NMMA's GW branch targets
+--- it delivers well-calibrated posteriors in a \textbf{median of twelve minutes on a single
+GPU} (five minutes sharded across four GPUs), with no approximation to the likelihood. Adding
+heterodyning/relative-binning compression~\cite{Zackay:2018qdy,Dai:2018dca} brings the median
+down to \textbf{89 seconds}, and a precessing-spin, tidal re-analysis of GW170817 itself
+completes in \textbf{$\sim$2 minutes}. Because this changes nothing about how NMMA's
+scientists would interpret the output --- still nested sampling, still a Bayesian evidence,
+still the full physical waveform --- it is arguably the lowest conceptual-risk transplant on
+this list.
+\item \textbf{Evidence estimation with jim + learned harmonic mean}~\cite{Polanska:2024zpn}
+(also co-authored within the group): benchmarks GPU-based normalizing-flow evidence
+estimation (jim + \code{harmonic}, 1 GPU) against \code{parallel-bilby}+dynesty (16 CPU
+cores) on a 4-dimensional and an 11-dimensional GW inference problem. Verified in the paper's
+own source: consistent evidence estimates with speedups of \textbf{$5.4\times$} (4D) and
+\textbf{$14.8\times$} (11D) --- the speedup \emph{grows} with dimensionality, the opposite of
+nested sampling's usual scaling, and exactly the regime NMMA's joint high-dimensional
+parametrizations live in.
+\item \textbf{dingo}~\cite{Dax:2021tsq,Dax:2022pxd}: amortized neural posterior estimation
+--- pay a one-off training cost (verified in the PRL paper's source: \emph{``training takes
+roughly 10 days''} on a GPU), then obtain a full posterior for a \emph{new} event in seconds.
+The paper's own text states inference time is reduced \emph{``from $\mathcal{O}(\text{day})$
+to 20 seconds per event,''} cross-validated against \code{bilby}+\code{dynesty} and
+LALInference nested-sampling posteriors via Jensen--Shannon divergence.
+\item \textbf{nessai}~\cite{Williams:2021qyt,Williams:2023ppp} takes a hybrid route: keep
+nested sampling but replace the inefficient rejection-based live-point proposal with a
+normalizing-flow-informed one, staying entirely inside the framework NMMA already depends on.
+\end{itemize}
+
+The common thread: a smooth, repeatedly-evaluated, GPU-batchable, or learnable likelihood
+surface is exactly what plain nested sampling never exploits, and what GPU-vectorized nested
+sampling, flow-enhanced MCMC, amortized neural posterior estimation, and flow-informed
+proposals all do, in four increasingly aggressive ways.
+
+\section{Learning from communities further away}
+
+The multimessenger/nuclear-astro community is not alone in having started from
+MCMC/nested-sampling defaults built for modest dimensionality and cheap-ish likelihoods.
+Other communities solved essentially the same scaling problem earlier, and each embodies a
+different strategy that maps onto a different piece of NMMA's likelihood stack.
+
+\begin{description}[leftmargin=1.2em,style=nextline]
+\item[Cosmology --- surrogate the slow physics, not (only) the sampler.]
+CMB/large-scale-structure inference (\code{Cobaya}~\cite{Torrado:2020dgo},
+\code{CosmoSIS}~\cite{Zuntz:2014csq}) faces an expensive deterministic solve (a Boltzmann
+code) inside every likelihood evaluation --- the direct analogue of NMMA's on-the-fly TOV
+solve for the EOS, or waveform generation for GW. The community's answer was largely
+\emph{not} a fancier sampler but a fast, differentiable emulator substituted for the slow
+solver, after which ordinary gradient-based samplers become affordable. For NMMA, the direct
+analogue is investing in JAX-differentiable or neural-emulated TOV/EOS and waveform
+evaluations, rather than only chasing sampler-level speedups.
+\item[Probabilistic programming --- go gradient-based.] Outside astrophysics,
+high-dimensional Bayesian inference is dominated by Hamiltonian Monte Carlo / NUTS via
+\code{Stan}, \code{PyMC}, or \code{NumPyro}~\cite{Phan:2019elc}. These scale far better with
+dimension than nested sampling because proposal efficiency does not degrade combinatorially
+with parameter count, but they require a differentiable log-likelihood. This is the real
+prerequisite shared by jim and the emulator route above: a JAX (or otherwise
+autodiff-compatible) rewrite of the likelihood is the single change that unlocks HMC/NUTS,
+flow-based MCMC, and gradient-informed nested sampling simultaneously.
+\item[Simulation-based inference --- amortize across events.] The SBI paradigm that dingo
+imports into GW astronomy (train once on simulated parameter$\to$data pairs, infer new
+events near-instantly), reviewed broadly in~\cite{Cranmer:2019eaq} and used heavily for LHC
+inference via tools such as \code{MadMiner}~\cite{Brehmer:2019xox}, is a natural fit for
+NMMA's EM branch: kilonova and GRB afterglow simulators are not free to evaluate, but they
+\emph{can} be called offline ahead of time. The repeated per-event nested-sampling cost NMMA
+currently pays for every new kilonova/GRB fit is exactly the cost SBI amortizes away.
+\end{description}
+
+\section{Recommendations}
+
+\begin{enumerate}[leftmargin=1.4em]
+\item \textbf{NMMA is not behind the curve within its own subfield.} No comparable open
+multimessenger or nuclear-EOS code (bajes, redback, MOSFiT, NEoST, the nonparametric-EOS
+lineage) has moved past nested sampling either. The opportunity is to be first, not to catch
+up.
+\item \textbf{Most direct near-term transplant, already in-house:} evaluate the GPU-native
+nested-sampling kernel of~\cite{Yallup:2026nqc} on NMMA's GW likelihood. Unlike every other
+item on this list, it changes nothing about the inference paradigm NMMA's science depends on
+--- still nested sampling, still an evidence estimate, still the full physical waveform ---
+only where the likelihood is evaluated. It was demonstrated on exactly NMMA's target signal
+class (long-duration, three-detector BNS) and already has an author in common with the group,
+making it plausibly the lowest-effort, highest-confidence win on this list.
+\item \textbf{Lowest-risk incremental step:} add \code{nessai}~\cite{Williams:2021qyt} as a
+sampler backend alongside pymultinest/dynesty/ultranest. It is a change to the sampler
+string, not the likelihood code, and stays inside the nested-sampling/evidence framework NMMA
+already depends on.
+\item \textbf{Highest-leverage step, also building on in-house work:} extend the jim/flowMC +
+learned-harmonic-mean pipeline, already validated for pure GW parameter estimation and
+evidence computation by the group itself~\cite{Polanska:2024zpn,Wong:2023lgb}, to NMMA's
+joint GW+EM+EOS likelihood. The verified $5.4\times$--$14.8\times$ (evidence, single-GW,
+growing with dimension) and $\sim$40$\times$--400$\times$ (full PE, GW150914/GW170817)
+speedups, on problems of comparable or lower dimensionality than NMMA's joint parametrization,
+suggest large, quantifiable gains rather than aspirational ones.
+\item \textbf{Medium-term, highest structural payoff:} pursue differentiable (JAX-based) or
+neural-emulated versions of NMMA's two slow deterministic solves --- the GW waveform and the
+TOV/EOS integration --- following the cosmology community's emulator strategy. This is the
+change that would make gradient-based samplers (HMC/NUTS) and amortized SBI available across
+\emph{all} of NMMA's source types at once, rather than as piecemeal per-messenger fixes.
+\item \textbf{Longer-term, for the EM branch specifically:} evaluate an amortized/SBI
+approach (dingo-style neural posterior estimation) for kilonova and GRB fitting, where the
+same light-curve model is currently re-fit from scratch, at full nested-sampling cost, for
+every new event.
+\end{enumerate}
+
+\section*{Methodology note}
+All literature identification and citation metadata in this document were retrieved
+programmatically from the INSPIRE-HEP Literature API
+(\url{https://inspirehep.net/api/literature}) and are recorded as full BibTeX entries in
+\code{references.bib}. Every performance and sampler claim attributed to jim, the GPU-native
+nested-sampling kernel, the Polanska et al.\ evidence pipeline, dingo, and redback/bajes was
+verified by fetching the paper's own \LaTeX{} source from arXiv (\code{arxiv.org/e-print/<id>})
+and grepping the relevant passages directly, rather than relying on abstracts. This process
+also caught and corrected two errors surfaced during drafting: redback's third supported
+sampler is \code{nestle}, not \code{nessai}, and the parallel-bilby citation key is
+\code{Talbot:2019okv}, not \code{Smith:2019ucc}. NMMA's own sampler configuration was verified
+directly from its source code (\code{nmma/core/parsing.py}, \code{pyproject.toml},
+\code{nmma/eos/tov.py}) rather than assumed from its publications.
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\end{document}

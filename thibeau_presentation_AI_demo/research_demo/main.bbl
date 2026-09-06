@@ -1,0 +1,197 @@
+\begin{thebibliography}{10}
+
+\bibitem{Ashton:2018jfp}
+Gregory Ashton et~al.
+\newblock {BILBY: A user-friendly Bayesian inference library for
+  gravitational-wave astronomy}.
+\newblock {\em Astrophys. J. Suppl.}, 241(2):27, 2019.
+
+\bibitem{Coughlin:2018fis}
+Michael~W. Coughlin, Tim Dietrich, Ben Margalit, and Brian~D. Metzger.
+\newblock {Multimessenger Bayesian parameter inference of a binary neutron star
+  merger}.
+\newblock {\em Mon. Not. Roy. Astron. Soc.}, 489(1):L91--L96, 2019.
+
+\bibitem{Pang:2022rzc}
+Peter T.~H. Pang et~al.
+\newblock {An updated nuclear-physics and multi-messenger astrophysics
+  framework for binary neutron star mergers}.
+\newblock {\em Nature Commun.}, 14(1):8352, 2023.
+
+\bibitem{Rose:2026cnm}
+Henrik Rose, Hauke Koehn, Thibeau Wouters, Peter T.~H. Pang, Mattia Bulla,
+  Michael~W. Coughlin, and Tim Dietrich.
+\newblock {nmma: An extended Bayesian framework for Nuclear Multimessenger
+  Astronomy in the Era of Next-Generation Detectors}.
+\newblock 7 2026.
+
+\bibitem{Feroz:2008xx}
+F.~Feroz, M.~P. Hobson, and M.~Bridges.
+\newblock {MultiNest: an efficient and robust Bayesian inference tool for
+  cosmology and particle physics}.
+\newblock {\em Mon. Not. Roy. Astron. Soc.}, 398:1601--1614, 2009.
+
+\bibitem{Speagle:2019ivv}
+Joshua~S. Speagle.
+\newblock {dynesty: a dynamic nested sampling package for estimating Bayesian
+  posteriors and evidences}.
+\newblock {\em Mon. Not. Roy. Astron. Soc.}, 493(3):3132--3158, 2020.
+
+\bibitem{Buchner:2021cql}
+Johannes Buchner.
+\newblock {UltraNest - a robust, general purpose Bayesian inference engine}.
+\newblock {\em J. Open Source Softw.}, 6(60):3001, 2021.
+
+\bibitem{Breschi:2021wzr}
+Matteo Breschi, Rossella Gamba, and Sebastiano Bernuzzi.
+\newblock {Bayesian inference of multimessenger astrophysical data: Methods and
+  applications to gravitational waves}.
+\newblock {\em Phys. Rev. D}, 104(4):042001, 2021.
+
+\bibitem{Breschi:2024qlc}
+Matteo Breschi, Rossella Gamba, Gregorio Carullo, Daniel Godzieba, Sebastiano
+  Bernuzzi, Albino Perego, and David Radice.
+\newblock {Bayesian inference of multimessenger astrophysical data: Joint and
+  coherent inference of gravitational waves and kilonovae}.
+\newblock {\em Astron. Astrophys.}, 689:A51, 2024.
+
+\bibitem{Raaijmakers:2025hbz}
+Geert Raaijmakers, Nathan Rutherford, Patrick Timmerman, Tuomo Salmi, Anna~L.
+  Watts, Chanda Prescod-Weinstein, Isak Svensson, and Melissa Mendes.
+\newblock {NEoST: A Python package for nested sampling of the neutron star
+  equation of state}.
+\newblock {\em J. Open Source Softw.}, 10(105):6003, 2025.
+
+\bibitem{Landry:2020vaw}
+Philippe Landry, Reed Essick, and Katerina Chatziioannou.
+\newblock {Nonparametric constraints on neutron star matter with existing and
+  upcoming gravitational wave and pulsar observations}.
+\newblock {\em Phys. Rev. D}, 101(12):123007, 2020.
+
+\bibitem{Legred:2021hdx}
+Isaac Legred, Katerina Chatziioannou, Reed Essick, Sophia Han, and Philippe
+  Landry.
+\newblock {Impact of the PSR J0740+6620 radius constraint on the properties of
+  high-density matter}.
+\newblock {\em Phys. Rev. D}, 104(6):063003, 2021.
+
+\bibitem{Finch:2025bao}
+Eliot Finch, Isaac Legred, Katerina Chatziioannou, Reed Essick, Sophia Han, and
+  Philippe Landry.
+\newblock {Unified nonparametric equation-of-state inference from the
+  neutron-star crust to perturbative-QCD densities}.
+\newblock {\em Phys. Rev. D}, 112(10):103023, 2025.
+
+\bibitem{Ng:2025wdj}
+Sunny Ng, Isaac Legred, Lami Suleiman, Philippe Landry, Lyla Traylor, and
+  Jocelyn Read.
+\newblock {Inferring the neutron star equation of state with nuclear-physics
+  informed semiparametric models}.
+\newblock {\em Class. Quant. Grav.}, 42(20):205008, 2025.
+
+\bibitem{Sarin:2023khf}
+Nikhil Sarin et~al.
+\newblock {redback: a Bayesian inference software package for electromagnetic
+  transients}.
+\newblock {\em Mon. Not. Roy. Astron. Soc.}, 531(1):1203--1227, 2024.
+
+\bibitem{Guillochon:2017bmg}
+James Guillochon, Matt Nicholl, V.~Ashley Villar, Brenna Mockler, Gautham
+  Narayan, Kaisey~S. Mandel, Edo Berger, and Peter K.~G. Williams.
+\newblock {MOSFiT: Modular Open-Source Fitter for Transients}.
+\newblock {\em Astrophys. J. Suppl.}, 236(1):6, 2018.
+
+\bibitem{Wong:2023lgb}
+Kaze W.~K. Wong, Maximiliano Isi, and Thomas D.~P. Edwards.
+\newblock {Fast Gravitational-wave Parameter Estimation without Compromises}.
+\newblock {\em Astrophys. J.}, 958(2):129, 2023.
+
+\bibitem{Wong:2022xvh}
+Kaze W.~k. Wong, Marylou Gabri{\'e}, and Daniel Foreman-Mackey.
+\newblock {flowMC: Normalizing flow enhanced sampling package for probabilistic
+  inference in JAX}.
+\newblock {\em J. Open Source Softw.}, 8(83):5021, 2023.
+
+\bibitem{Yallup:2026nqc}
+David Yallup, Metha Prathaban, James Alvey, Thomas C.~K. Ng, Thibeau Wouters,
+  Nikhil Sarin, and Will Handley.
+\newblock {Ab Initio Real-Time Gravitational-Wave Parameter Estimation}.
+\newblock 7 2026.
+
+\bibitem{Dax:2021tsq}
+Maximilian Dax, Stephen~R. Green, Jonathan Gair, Jakob~H. Macke, Alessandra
+  Buonanno, and Bernhard Sch{\"o}lkopf.
+\newblock {Real-Time Gravitational Wave Science with Neural Posterior
+  Estimation}.
+\newblock {\em Phys. Rev. Lett.}, 127(24):241103, 2021.
+
+\bibitem{Dax:2022pxd}
+Maximilian Dax, Stephen~R. Green, Jonathan Gair, Michael P{\"u}rrer, Jonas
+  Wildberger, Jakob~H. Macke, Alessandra Buonanno, and Bernhard Sch{\"o}lkopf.
+\newblock {Neural Importance Sampling for Rapid and Reliable Gravitational-Wave
+  Inference}.
+\newblock {\em Phys. Rev. Lett.}, 130(17):171403, 2023.
+
+\bibitem{Williams:2021qyt}
+Michael~J. Williams, John Veitch, and Chris Messenger.
+\newblock {Nested sampling with normalizing flows for gravitational-wave
+  inference}.
+\newblock {\em Phys. Rev. D}, 103(10):103006, 2021.
+
+\bibitem{Williams:2023ppp}
+Michael~J. Williams, John Veitch, and Chris Messenger.
+\newblock {Importance nested sampling with normalising flows}.
+\newblock {\em Mach. Learn. Sci. Tech.}, 4(3):035011, 2023.
+
+\bibitem{Talbot:2019okv}
+Colm Talbot, Rory Smith, Eric Thrane, and Gregory~B. Poole.
+\newblock {Parallelized Inference for Gravitational-Wave Astronomy}.
+\newblock {\em Phys. Rev. D}, 100(4):043030, 2019.
+
+\bibitem{Zackay:2018qdy}
+Barak Zackay, Liang Dai, and Tejaswi Venumadhav.
+\newblock {Relative Binning and Fast Likelihood Evaluation for Gravitational
+  Wave Parameter Estimation}.
+\newblock 6 2018.
+
+\bibitem{Dai:2018dca}
+Liang Dai, Tejaswi Venumadhav, and Barak Zackay.
+\newblock {Parameter Estimation for GW170817 using Relative Binning}.
+\newblock 6 2018.
+
+\bibitem{Polanska:2024zpn}
+Alicja Polanska, Thibeau Wouters, Peter T.~H. Pang, Kaze K.~W. Wong, and
+  Jason~D. McEwen.
+\newblock {Accelerated Bayesian parameter estimation and model selection for
+  gravitational waves with normalizing flows}.
+\newblock In {\em {Postponed: Machine Learning and the Physical Sciences}:
+  {Workshop at NeurIPS 2024}}, 10 2024.
+
+\bibitem{Torrado:2020dgo}
+Jesus Torrado and Antony Lewis.
+\newblock {Cobaya: Code for Bayesian Analysis of hierarchical physical models}.
+\newblock {\em JCAP}, 05:057, 2021.
+
+\bibitem{Zuntz:2014csq}
+Joe Zuntz, Marc Paterno, Elise Jennings, Douglas Rudd, Alessandro Manzotti,
+  Scott Dodelson, Sarah Bridle, Saba Sehrish, and James Kowalkowski.
+\newblock {CosmoSIS: modular cosmological parameter estimation}.
+\newblock {\em Astron. Comput.}, 12:45--59, 2015.
+
+\bibitem{Phan:2019elc}
+Du~Phan, Neeraj Pradhan, and Martin Jankowiak.
+\newblock {Composable Effects for Flexible and Accelerated Probabilistic
+  Programming in NumPyro}.
+\newblock 12 2019.
+
+\bibitem{Cranmer:2019eaq}
+Kyle Cranmer, Johann Brehmer, and Gilles Louppe.
+\newblock {The frontier of simulation-based inference}.
+\newblock {\em Proc. Nat. Acad. Sci.}, 117(48):30055--30062, 2020.
+
+\bibitem{Brehmer:2019xox}
+Johann Brehmer, Felix Kling, Irina Espejo, and Kyle Cranmer.
+\newblock {MadMiner: Machine learning-based inference for particle physics}.
+\newblock {\em Comput. Softw. Big Sci.}, 4(1):3, 2020.
+
+\end{thebibliography}
