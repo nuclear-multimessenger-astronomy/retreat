@@ -28,8 +28,8 @@ should be the first thing done at the retreat to corroborate and extend §4.2.
    test**. `nmma/core/mpi_setup.py` (683 lines, the MPI-parallel `pbilby_sampling`
    path used whenever `USE_MPI and sampler == 'dynesty'`) also has zero coverage —
    exactly the kind of ordering-sensitive distributed code that regresses silently.
-   The maintainers already know part of this — issue **#196 "Tests for nmma/eos"**
-   and **#299 "Joint analysis unit test"** have been open since **2023-08** and
+   The maintainers already know part of this — issue **[#196](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/196) "Tests for nmma/eos"**
+   and **[#299](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/299) "Joint analysis unit test"** have been open since **2023-08** and
    **2024-01** respectively.
 2. **`nmma/tests/models.py` is entirely `pytest.mark.skip`'d** (GitLab SVD download
    path retired) and never replaced with an equivalent test — a whole test file is
@@ -103,11 +103,11 @@ should be the first thing done at the retreat to corroborate and extend §4.2.
    no path from the README to actually running the tool. `doc/models.md` links to a
    stale line-anchor in `nmma/em/model.py` (points at line 72; the actual content is
    now ~97–125) — the model names themselves were spot-checked and are still
-   accurate, only the link target drifted. Further drift: issue **#374** (arm64
-   install instructions incomplete), **#307** (joint-analysis docs incomplete since
-   2024-01), **#213/#136** (Zenodo quickstart docs requested, never written), and doc
+   accurate, only the link target drifted. Further drift: issue **[#374](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/374)** (arm64
+   install instructions incomplete), **[#307](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/307)** (joint-analysis docs incomplete since
+   2024-01), **[#213](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/213)/[#136](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/136)** (Zenodo quickstart docs requested, never written), and doc
    pages describing `core_model_name` behavior tied to the still-open design question
-   in **#388**. On the positive side, `doc/quick-start-guide.rst`'s core commands
+   in **[#388](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/388)**. On the positive side, `doc/quick-start-guide.rst`'s core commands
    (`nmma-create-injection`, `lightcurve-analysis`, `--prior-file`, `--eos-file`,
    etc.) were spot-checked against live `[project.scripts]` entry points and model
    definitions and are otherwise accurate.
@@ -120,7 +120,7 @@ should be the first thing done at the retreat to corroborate and extend §4.2.
    supply-chain risk specifically in the *publish* workflow), plus
    `actions/setup-python@v3` (current is v5) and inconsistent Docker action versions
    in `build-deploy-container.yml`.
-9. **PR queue has two multi-megabyte-diff PRs** (#105, #82: +3.3M lines each) sitting
+9. **PR queue has two multi-megabyte-diff PRs** ([#105](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/105), [#82](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/82): +3.3M lines each) sitting
    open since June 2023 — almost certainly stale branches with binary/pickle files
    being diffed as text (no `.gitattributes` rule stops this). Both should be
    closed/rebased, not merged as-is; a `.gitattributes` rule (e.g. `*.pkl -diff -text`,
@@ -158,7 +158,7 @@ should be the first thing done at the retreat to corroborate and extend §4.2.
 ### P0 — do first (small effort, high leverage, unblocks everything else)
 1. Stand up **coverage-gated CI** for `eos/`, `gw/`, `mlmodel/`, `population/`,
    `post_processing/`, and `core/mpi_setup.py` — even one smoke test per module
-   raises the floor and prevents silent regressions. (Ties to #196, #299.)
+   raises the floor and prevents silent regressions. (Ties to [#196](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/196), [#299](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/299).)
 2. Delete or replace `nmma/tests/models.py` — a fully-skipped test file is worse than
    no file; either wire it to the `fiesta_smoke.py` replacement path or remove it.
 3. Fix the two concrete latent bugs: the `base.py` `constraints` setter
@@ -184,7 +184,7 @@ should be the first thing done at the retreat to corroborate and extend §4.2.
    `doc/_static/.nmma-docs.css.un~`; delete confirmed-dead `loadEventSpec()` in
    `nmma/em/io.py:546`; fix the un-prefixed regex in `nmma/core/utils.py:129`; add a
    `.gitattributes` rule for binary/pickle files (`*.pkl -diff -text`,
-   `*.pth -diff -text`) to stop future mega-diff PRs like #105/#82.
+   `*.pth -diff -text`) to stop future mega-diff PRs like [#105](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/105)/[#82](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/82).
 
 ### P1 — do this week (medium effort)
 8. Triage and resolve the ~50–65 `FIXME`/`TODO` comments: convert each into either
@@ -196,36 +196,36 @@ should be the first thing done at the retreat to corroborate and extend §4.2.
    already set up in the same module (`nmma/core/base.py`'s `bilby_sampling`,
    `nmma/em/analysis.py` throughout) — mechanical, high-value for anyone debugging
    production runs.
-10. Close or rebase the two mega-diff stale PRs (#105, #82) after confirming with
+10. Close or rebase the two mega-diff stale PRs ([#105](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/105), [#82](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/82)) after confirming with
     authors nothing salvageable remains.
-11. Resolve version-key duplication: `distance` vs `luminosity_distance` (#375) —
+11. Resolve version-key duplication: `distance` vs `luminosity_distance` ([#375](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/375)) —
     decide on one canonical key and deprecate the other with a warning, then remove.
-12. Decide and document a **versioning/release policy** (#183, #429, #184) — there's
+12. Decide and document a **versioning/release policy** ([#183](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/183), [#429](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/429), [#184](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/184)) — there's
     active user demand for a 1.1 release; blocked partly by unresolved TF version
-    constraints (#335) and undocumented SVD model coverage (#382).
+    constraints ([#335](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/335)) and undocumented SVD model coverage ([#382](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/382)).
 13. Reconcile CLI docs against `[project.scripts]` in `pyproject.toml` (18 entry
     points, 7 of which — `lightcurve-injection-slurm-setup`, `create-lightcurve-slurm`,
     `svdmodel-download`, `multi-config-analysis`, `plot-svdmodel-benchmarks`,
     `gwem-Hubble-estimate`, `gwem-resampling` — are never invoked in any test) —
     audit that each has an up-to-date doc page or docstring; the Zenodo/joint
-    analysis docs specifically are known-incomplete (#307, #213, #136). Also fix
+    analysis docs specifically are known-incomplete ([#307](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/307), [#213](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/213), [#136](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/136)). Also fix
     `doc/models.md`'s stale line-anchor link into `nmma/em/model.py`.
 14. Decide the long-term status of `nmma/mlmodel/` (maintain-with-tests vs.
     explicitly deprecate) — see headline finding 6.
 
 ### P2 — track for next cycle (larger, needs design time)
-15. Resolve `core_model_name` design ambiguity (#388) — affects how local vs. shared
+15. Resolve `core_model_name` design ambiguity ([#388](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/388)) — affects how local vs. shared
     SVD models are named/discovered; touches `nmma/em/model.py`.
-16. Decouple training/analysis code from the pinned TensorFlow version ceiling (#335,
-    stemming from #334), and address poor training results on the new grid (#301).
-17. Redesign `gwem_resampling`'s KDE/approximation scheme (#78) — flagged by the
+16. Decouple training/analysis code from the pinned TensorFlow version ceiling ([#335](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/335),
+    stemming from [#334](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/334)), and address poor training results on the new grid ([#301](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/301)).
+17. Redesign `gwem_resampling`'s KDE/approximation scheme ([#78](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/78)) — flagged by the
     original author as not physically ideal.
 18. Add a schema/version check to the `*_dump.pickle` inter-process contract between
     `nmma-generation` and `nmma-analysis`, so a stale dump from before a code change
     fails loudly instead of silently misbehaving.
-19. Consider adding a `conda`-first `environment.yml` (#206) if the team wants to
+19. Consider adding a `conda`-first `environment.yml` ([#206](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/206)) if the team wants to
     reduce pip/conda dependency-resolution friction for new users.
-20. Investigate the long-standing dynesty/ultranest indefinite-hang bug (#202) — a
+20. Investigate the long-standing dynesty/ultranest indefinite-hang bug ([#202](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/202)) — a
     real sampler bug requiring deep debugging.
 
 ---
@@ -242,22 +242,22 @@ break/deprecate an API — not appropriate to hand to an AI agent unsupervised.
 - `nmma/em/lightcurve_generation.py:145` — whether the $(1+z)$ vs $(1+z)^2$
   bolometric luminosity correction is right. A physics call with real result
   implications.
-- Decide the fate of `core_model_name` (#388) — an API/data-model decision affecting
+- Decide the fate of `core_model_name` ([#388](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/388)) — an API/data-model decision affecting
   how users organize trained SVD grids.
 - Decide the long-term status of `nmma/mlmodel/` (maintain vs. deprecate).
 - Redesign or explicitly accept `MultiMessengerLikelihood.setup_from_args`
   (`nmma/joint/joint_likelihood.py:89-177`) as the ad-hoc dispatcher it currently is.
 - Decide on a schema/versioning strategy for the `*_dump.pickle` inter-process
   contract between `nmma-generation` and `nmma-analysis`.
-- Versioning/release policy (#183, #429, #184) and what "NMMA 1.1" should contain
+- Versioning/release policy ([#183](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/183), [#429](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/429), [#184](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/184)) and what "NMMA 1.1" should contain
   (which models must work, what's a breaking change).
-- TensorFlow version ceiling (#335) and training-quality regression (#301, #302) —
+- TensorFlow version ceiling ([#335](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/335)) and training-quality regression ([#301](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/301), [#302](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/302)) —
   require actually re-validating training code against newer TF, a nontrivial
   numerical-behavior check, not a mechanical bump.
-- Redesign of `gwem_resampling`'s KDE scheme (#78) and the sequential Bayesian
-  Hubble-constant update (#100) — statistical methodology decisions.
-- Deciding what to do with the two mega-diff stale PRs (#105, #82) and the 2023-era
-  draft PR (#215) — need author/maintainer context on whether work is salvageable.
+- Redesign of `gwem_resampling`'s KDE scheme ([#78](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/78)) and the sequential Bayesian
+  Hubble-constant update ([#100](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/100)) — statistical methodology decisions.
+- Deciding what to do with the two mega-diff stale PRs ([#105](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/105), [#82](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/82)) and the 2023-era
+  draft PR ([#215](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/215)) — need author/maintainer context on whether work is salvageable.
 - Deciding which of the ~50–65 `FIXME`s represent real physics bugs vs. acceptable
   approximations worth documenting-and-closing rather than fixing.
 - Coverage strategy for `eos/`/`gw/`/`mlmodel/`/`mpi_setup.py` — what counts as a
@@ -266,16 +266,16 @@ break/deprecate an API — not appropriate to hand to an AI agent unsupervised.
 - Population module correctness (`NeutronStarPopulation` only supports 2 hardcoded
   distributions) — deciding whether/how to generalize is a design call, even though
   the missing-else-branch bug fix itself is mechanical.
-- The `richpool` vs `schwimmbad` question (#432, PR #433) — a dependency swap
+- The `richpool` vs `schwimmbad` question ([#432](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/432), PR [#433](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/433)) — a dependency swap
   touching the untested `mpi_setup.py`; needs someone who can actually validate MPI
   behavior.
-- The long-standing dynesty/ultranest indefinite-hang bug (#202) — needs deep
+- The long-standing dynesty/ultranest indefinite-hang bug ([#202](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/202)) — needs deep
   sampler-specific debugging expertise.
-- Milky-Way extinction law (G23) + SFD recalibration (#426) — technically
+- Milky-Way extinction law (G23) + SFD recalibration ([#426](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/426)) — technically
   well-specified enough that an agent could draft the implementation, but it's a
   physics-correctness change to shipped results and needs expert sign-off regardless.
-- Reviewing/merging the three large, physics-adjacent open PRs: #409 (RA/Dec units
-  fix, 69 files, correctness-critical), #397 (tensor-loading refactor), #379 (new
+- Reviewing/merging the three large, physics-adjacent open PRs: [#409](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/409) (RA/Dec units
+  fix, 69 files, correctness-critical), [#397](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/397) (tensor-loading refactor), [#379](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/379) (new
   LANL1D model — already approved once but has since drifted into merge conflicts,
   needs a science review of the model itself before re-merging).
 
@@ -299,25 +299,25 @@ These are good candidates to hand to an AI coding agent, with human review of th
   reformat separately from logic changes.
 - Write smoke tests (import + run with fixture data + basic shape/type assertions)
   for the untested pure-ish functions in `post_processing/`, `eos/eos_processing.py`,
-  and `core/mpi_setup.py`. Directly matches open issues **#196** (eos tests) and
-  **#299** (joint-analysis test) — good agent-assignable tasks once a human specifies
+  and `core/mpi_setup.py`. Directly matches open issues **[#196](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/196)** (eos tests) and
+  **[#299](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/299)** (joint-analysis test) — good agent-assignable tasks once a human specifies
   what a correct test case looks like.
-- Fix arm64 install docs per the working recipe already given in **#374** (the fix
+- Fix arm64 install docs per the working recipe already given in **[#374](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/374)** (the fix
   is literally pasted in the issue).
-- **#375** deprecated-key cleanup (`distance` → `luminosity_distance`): the issue
+- **[#375](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/375)** deprecated-key cleanup (`distance` → `luminosity_distance`): the issue
   body already lists the exact files — grep-and-replace with a deprecation warning
   is mechanical, though the final "which key wins" call is P1 human sign-off.
-- **#382** `Bu2022mv` model not found: narrow, reproducible bug report with a code
+- **[#382](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/382)** `Bu2022mv` model not found: narrow, reproducible bug report with a code
   snippet already in the issue.
-- **#357** timeshift dropped by `processData()`: bounded bug with a clear description
+- **[#357](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/357)** timeshift dropped by `processData()`: bounded bug with a clear description
   of the failure mode.
-- **#263** DOI-fetch 429 errors under high process count — cache the Zenodo DOI
+- **[#263](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/263)** DOI-fetch 429 errors under high process count — cache the Zenodo DOI
   lookup once (rank-0-only fetch + broadcast, or `functools.lru_cache`/on-disk
   cache) instead of hitting the API from every MPI rank.
-- **#81** "sample times double call" — remove the redundant `sample_times` argument
+- **[#81](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/81)** "sample times double call" — remove the redundant `sample_times` argument
   requirement in `generate_lightcurve`, reusing the value already stored on the
   model instance; issue author already scoped the change to `model.py`. (Note: PR
-  #82 already attempted this but is an abandoned, unvalidated, multi-million-line
+  [#82](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/82) already attempted this but is an abandoned, unvalidated, multi-million-line
   diff — redo small rather than resurrect it.)
 - Small doc cross-reference sweep: confirm every `[project.scripts]` entry point in
   `pyproject.toml` has a corresponding doc mention; fix `doc/models.md`'s stale line
@@ -325,14 +325,14 @@ These are good candidates to hand to an AI coding agent, with human review of th
 - Mechanical first pass at missing docstrings in `nmma/core/base.py` and
   `nmma/joint/joint_likelihood.py` (stub docstrings from signatures/existing
   parameter lists) — human should then review/refine physics wording.
-- Additional narrowly-scoped issues with clear specs: **#206** conda
-  `environment.yml`, **#346** add JSON lightcurves to example files, **#307**
-  joint-analysis documentation, **#136** Zenodo quickstart docs, **#181**
-  compatibility list in docs, **#188** a `--debug` CLI flag, **#142** "plot multiple
+- Additional narrowly-scoped issues with clear specs: **[#206](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/206)** conda
+  `environment.yml`, **[#346](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/346)** add JSON lightcurves to example files, **[#307](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/307)**
+  joint-analysis documentation, **[#136](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/136)** Zenodo quickstart docs, **[#181](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/181)**
+  compatibility list in docs, **[#188](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/188)** a `--debug` CLI flag, **[#142](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/142)** "plot multiple
   models onto fit lightcurve" (labeled `good first issue`, reference implementation
-  already linked in the issue), **#184** release-notes writing (once the versioning
+  already linked in the issue), **[#184](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/184)** release-notes writing (once the versioning
   policy itself is decided by a human).
-- PR **#276** (add apptainer definition file) — small, self-contained, already
+- PR **[#276](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/276)** (add apptainer definition file) — small, self-contained, already
   sanity-checked by the author; just needs a rebase/re-verify and merge.
 
 ---
@@ -435,42 +435,42 @@ These are good candidates to hand to an AI coding agent, with human review of th
 
 | # | Title | Age | Classification | Rationale |
 |---|-------|-----|----------------|-----------|
-| 432 | Using richpool | 2026-08 | Needs human | Dependency-swap proposal for untested `mpi_setup.py`; needs someone who can validate MPI behavior. Paired with PR #433. |
-| 429 | NMMA 1.1 release? | 2026-07 | Needs human | Release/admin-rights process decision, not code. |
-| 426 | Milky-Way extinction law (G23) + SFD recalibration | 2026-07 | Needs human (AI can draft) | Well-specified technically, but a physics-correctness change to shipped results — needs expert sign-off even if an agent drafts the implementation. |
-| 400 | `default_prior` in `InjectionCreator` | 2025-08 | Needs human | Blocked on an upstream `bilby`/`bilby_pipe` design decision, not resolvable unilaterally in NMMA. |
-| 388 | Remove reliance on `core_model_name` | 2024-11 | Needs human | API/design change to how SVD models are named and loaded. |
-| 382 | `Bu2022mv` not found in models list | 2024-08 | AI-tractable | Clear repro snippet in the issue; likely a model-registration/name mismatch. |
-| 375 | Change deprecated key `distance`→`luminosity_distance` | 2024-08 | AI-tractable | Issue text already enumerates every file to change. |
-| 374 | Update docs for arm64 | 2024-08 | AI-tractable | Doc update, narrow scope, fix already given. |
-| 357 | Timeshift in injection files not included by `utils.py` | 2024-04 | AI-tractable | Bounded bug with a clear description of the failure mode. |
-| 346 | Add JSON lightcurves to example files | 2024-03 | AI-tractable | Simple additive task. |
-| 335 | Relax tensorflow version requirement | 2024-03 | Needs human | Requires re-validating training/analysis against newer TF — real compatibility risk. |
-| 307 | Joint analysis documentation | 2024-01 | AI-tractable | Pure doc-writing task. |
-| 302 | Auto-train tensorflow models on updated grids | 2024-01 | Needs human | New automation/infra feature requiring design decisions. |
-| 301 | Poor tensorflow training results for new model grid | 2024-01 | Needs human | ML/training-quality issue requiring domain expertise to diagnose. |
-| 299 | Joint analysis unit test | 2024-01 | AI-tractable | Directly matches a test-coverage gap in this audit. |
-| 263 | DOI not retrievable with too many processes | 2023-10 | AI-tractable | Concurrency bug with a well-understood fix (cache/broadcast the lookup). |
-| 257 | Calculate chi2 between observation and lightcurve grid | 2023-10 | Needs human | New analysis feature requiring a design decision on the statistic. |
-| 213 | Zenodo initialization without an analysis | 2023-08 | Needs human | Requires an API-design decision on how to expose standalone filter downloads. |
-| 206 | `environment.yml` for conda environment | 2023-08 | AI-tractable | Simple, self-contained addition. |
-| 203 | E(B-V) contribution in likelihood.py | 2023-08 | Needs human | Physics-modeling feature, needs expert design/review. |
-| 202 | dynesty/ultranest samplers run indefinitely | 2023-08 | Needs human | Long-standing, hard sampler-hang bug; needs deep debugging expertise. |
-| 196 | Tests for `nmma/eos` | 2023-08 | AI-tractable | Directly matches this audit's #1 test-coverage gap. |
-| 188 | debug flag | 2023-08 | AI-tractable | Small, scoped CLI feature. |
-| 184 | Release Notes for Version changes | 2023-07 | AI-tractable | Doc/process writing task (once policy is set). |
-| 183 | Versioning schema | 2023-07 | Needs human | Policy decision for the project. |
-| 181 | Add compatibility list to documentation | 2023-07 | AI-tractable | Doc addition. |
-| 159 | Move `best_fit.json` into `*_result.json` | 2023-07 | Stale — labeled `wontfix` | Already tagged `wontfix`; needs a maintainer to close it or explain the reversal. |
-| 142 | Plot multiple models onto fit lightcurve | 2023-06 | AI-tractable | Labeled `good first issue`; reference implementation linked in the issue. |
-| 139 | Strategy for adding models | 2023-06 | Needs human | Process/governance discussion, not code. |
-| 136 | Zenodo quickstart docs | 2023-06 | AI-tractable | Doc-writing task. |
-| 125 | `svdmodel_benchmark` multiprocessing bug | 2023-06 | Stale — needs triage | 3+ years old, unclear if still reproducible against current code. |
-| 100 | Sequential Bayesian update for Hubble constant | 2023-06 | Needs human | Statistical-method design question. |
-| 83 | Additional filter enforcement for augmented lightcurves | 2023-05 | Stale — needs triage | Old, thin description, unclear current relevance. |
-| 81 | Sample times double call | 2023-04 | Needs human | Already has an abandoned, unvalidated attempt (PR #82, huge risky diff) — needs a maintainer decision on approach before another attempt (the fix itself, once scoped, is AI-tractable — see §3.2). |
-| 78 | Improve `gwem_resampling` | 2023-03 | Needs human | Vague scope ("approximations... not ideal"); needs a statistical-design decision first. |
-| 20 | Sampler parameter tuning | 2022-04 | Stale — needs triage | Very old, vague, likely superseded by #202. |
+| [432](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/432) | Using richpool | 2026-08 | Needs human | Dependency-swap proposal for untested `mpi_setup.py`; needs someone who can validate MPI behavior. Paired with PR [#433](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/433). |
+| [429](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/429) | NMMA 1.1 release? | 2026-07 | Needs human | Release/admin-rights process decision, not code. |
+| [426](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/426) | Milky-Way extinction law (G23) + SFD recalibration | 2026-07 | Needs human (AI can draft) | Well-specified technically, but a physics-correctness change to shipped results — needs expert sign-off even if an agent drafts the implementation. |
+| [400](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/400) | `default_prior` in `InjectionCreator` | 2025-08 | Needs human | Blocked on an upstream `bilby`/`bilby_pipe` design decision, not resolvable unilaterally in NMMA. |
+| [388](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/388) | Remove reliance on `core_model_name` | 2024-11 | Needs human | API/design change to how SVD models are named and loaded. |
+| [382](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/382) | `Bu2022mv` not found in models list | 2024-08 | AI-tractable | Clear repro snippet in the issue; likely a model-registration/name mismatch. |
+| [375](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/375) | Change deprecated key `distance`→`luminosity_distance` | 2024-08 | AI-tractable | Issue text already enumerates every file to change. |
+| [374](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/374) | Update docs for arm64 | 2024-08 | AI-tractable | Doc update, narrow scope, fix already given. |
+| [357](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/357) | Timeshift in injection files not included by `utils.py` | 2024-04 | AI-tractable | Bounded bug with a clear description of the failure mode. |
+| [346](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/346) | Add JSON lightcurves to example files | 2024-03 | AI-tractable | Simple additive task. |
+| [335](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/335) | Relax tensorflow version requirement | 2024-03 | Needs human | Requires re-validating training/analysis against newer TF — real compatibility risk. |
+| [307](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/307) | Joint analysis documentation | 2024-01 | AI-tractable | Pure doc-writing task. |
+| [302](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/302) | Auto-train tensorflow models on updated grids | 2024-01 | Needs human | New automation/infra feature requiring design decisions. |
+| [301](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/301) | Poor tensorflow training results for new model grid | 2024-01 | Needs human | ML/training-quality issue requiring domain expertise to diagnose. |
+| [299](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/299) | Joint analysis unit test | 2024-01 | AI-tractable | Directly matches a test-coverage gap in this audit. |
+| [263](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/263) | DOI not retrievable with too many processes | 2023-10 | AI-tractable | Concurrency bug with a well-understood fix (cache/broadcast the lookup). |
+| [257](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/257) | Calculate chi2 between observation and lightcurve grid | 2023-10 | Needs human | New analysis feature requiring a design decision on the statistic. |
+| [213](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/213) | Zenodo initialization without an analysis | 2023-08 | Needs human | Requires an API-design decision on how to expose standalone filter downloads. |
+| [206](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/206) | `environment.yml` for conda environment | 2023-08 | AI-tractable | Simple, self-contained addition. |
+| [203](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/203) | E(B-V) contribution in likelihood.py | 2023-08 | Needs human | Physics-modeling feature, needs expert design/review. |
+| [202](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/202) | dynesty/ultranest samplers run indefinitely | 2023-08 | Needs human | Long-standing, hard sampler-hang bug; needs deep debugging expertise. |
+| [196](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/196) | Tests for `nmma/eos` | 2023-08 | AI-tractable | Directly matches this audit's #1 test-coverage gap. |
+| [188](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/188) | debug flag | 2023-08 | AI-tractable | Small, scoped CLI feature. |
+| [184](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/184) | Release Notes for Version changes | 2023-07 | AI-tractable | Doc/process writing task (once policy is set). |
+| [183](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/183) | Versioning schema | 2023-07 | Needs human | Policy decision for the project. |
+| [181](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/181) | Add compatibility list to documentation | 2023-07 | AI-tractable | Doc addition. |
+| [159](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/159) | Move `best_fit.json` into `*_result.json` | 2023-07 | Stale — labeled `wontfix` | Already tagged `wontfix`; needs a maintainer to close it or explain the reversal. |
+| [142](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/142) | Plot multiple models onto fit lightcurve | 2023-06 | AI-tractable | Labeled `good first issue`; reference implementation linked in the issue. |
+| [139](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/139) | Strategy for adding models | 2023-06 | Needs human | Process/governance discussion, not code. |
+| [136](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/136) | Zenodo quickstart docs | 2023-06 | AI-tractable | Doc-writing task. |
+| [125](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/125) | `svdmodel_benchmark` multiprocessing bug | 2023-06 | Stale — needs triage | 3+ years old, unclear if still reproducible against current code. |
+| [100](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/100) | Sequential Bayesian update for Hubble constant | 2023-06 | Needs human | Statistical-method design question. |
+| [83](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/83) | Additional filter enforcement for augmented lightcurves | 2023-05 | Stale — needs triage | Old, thin description, unclear current relevance. |
+| [81](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/81) | Sample times double call | 2023-04 | Needs human | Already has an abandoned, unvalidated attempt (PR [#82](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/82), huge risky diff) — needs a maintainer decision on approach before another attempt (the fix itself, once scoped, is AI-tractable — see §3.2). |
+| [78](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/78) | Improve `gwem_resampling` | 2023-03 | Needs human | Vague scope ("approximations... not ideal"); needs a statistical-design decision first. |
+| [20](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/20) | Sampler parameter tuning | 2022-04 | Stale — needs triage | Very old, vague, likely superseded by [#202](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/202). |
 
 **Issue summary:** 15 AI-tractable · 17 needs-human · 4 stale/needs-triage-first
 (including 1 already `wontfix`).
@@ -479,14 +479,14 @@ These are good candidates to hand to an AI coding agent, with human review of th
 
 | PR | Title | Size | Status | Recommendation |
 |----|-------|------|--------|-----------------|
-| #433 | use richpool interface | tiny (+5/-5) | mergeable, review required | Small diff, but touches untested `mpi_setup.py`; author explicitly asks for help validating it actually works. **Needs human.** |
-| #409 | Fix radec units | large (69 files, +2366/-1539) | conflicting, review required | Physics-critical correctness fix — needs careful expert review before merge given the blast radius, plus a rebase to resolve conflicts. **Needs human.** |
-| #397 | Generalizing Light Curve to Tensor Loading | medium (5 files, +596/-395) | conflicting, review required, stale since Jul 2025 | Substantial dataloading refactor; needs a design opinion on the generalized approach and conflict resolution. **Needs human.** |
-| #379 | LANL1D model addition | small (+37/-2) | conflicting, previously approved | New physics model contribution; needs science review of the model itself plus conflict resolution — was `APPROVED` once but has since drifted into conflicts. **Needs human** (not the pure "just merge" fast win it looked like before conflicts appeared). |
-| #276 | add apptainer definition file | tiny (+25/-0) | mergeable, review required | Small, self-contained, author already ran basic sanity checks. **AI-tractable / fast win** — just needs a rebase/re-verify and merge. |
-| #215 | multi_model_analysis command | draft, conflicting, small (+29/-0) | stale since Sep 2023 | Still in draft; needs design review of its interaction with existing multi-model support in `light_curve_analysis`. **Needs human.** |
-| #105 | Remove old Bu2019lm pickle / install updates | draft, conflicting, **+3.38M/-4.8k lines, 222 files** | stale since Jun 2023 | Almost certainly a stale branch with binary/pickle files diffed as text; needs a maintainer to figure out what actually changed before this can be reviewed at all. **Needs human — close or rebase from scratch.** |
-| #82 | removed sample_times arg in generate_lightcurve | conflicting, +3.37M/-2.6k lines, 205 files | stale since Jun 2023 | Same multi-million-line-diff red flag as #105; author explicitly states not all call sites were validated. Maps to open issue **#81**, so the *intent* is still valid — worth redoing as a small, clean PR (agent-tractable) rather than resurrecting this branch. **Needs human to make the close/redo call; the redo itself is AI-tractable.** |
+| [#433](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/433) | use richpool interface | tiny (+5/-5) | mergeable, review required | Small diff, but touches untested `mpi_setup.py`; author explicitly asks for help validating it actually works. **Needs human.** |
+| [#409](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/409) | Fix radec units | large (69 files, +2366/-1539) | conflicting, review required | Physics-critical correctness fix — needs careful expert review before merge given the blast radius, plus a rebase to resolve conflicts. **Needs human.** |
+| [#397](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/397) | Generalizing Light Curve to Tensor Loading | medium (5 files, +596/-395) | conflicting, review required, stale since Jul 2025 | Substantial dataloading refactor; needs a design opinion on the generalized approach and conflict resolution. **Needs human.** |
+| [#379](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/379) | LANL1D model addition | small (+37/-2) | conflicting, previously approved | New physics model contribution; needs science review of the model itself plus conflict resolution — was `APPROVED` once but has since drifted into conflicts. **Needs human** (not the pure "just merge" fast win it looked like before conflicts appeared). |
+| [#276](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/276) | add apptainer definition file | tiny (+25/-0) | mergeable, review required | Small, self-contained, author already ran basic sanity checks. **AI-tractable / fast win** — just needs a rebase/re-verify and merge. |
+| [#215](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/215) | multi_model_analysis command | draft, conflicting, small (+29/-0) | stale since Sep 2023 | Still in draft; needs design review of its interaction with existing multi-model support in `light_curve_analysis`. **Needs human.** |
+| [#105](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/105) | Remove old Bu2019lm pickle / install updates | draft, conflicting, **+3.38M/-4.8k lines, 222 files** | stale since Jun 2023 | Almost certainly a stale branch with binary/pickle files diffed as text; needs a maintainer to figure out what actually changed before this can be reviewed at all. **Needs human — close or rebase from scratch.** |
+| [#82](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/82) | removed sample_times arg in generate_lightcurve | conflicting, +3.37M/-2.6k lines, 205 files | stale since Jun 2023 | Same multi-million-line-diff red flag as [#105](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/105); author explicitly states not all call sites were validated. Maps to open issue **[#81](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/81)**, so the *intent* is still valid — worth redoing as a small, clean PR (agent-tractable) rather than resurrecting this branch. **Needs human to make the close/redo call; the redo itself is AI-tractable.** |
 
 **PR summary:** 1 AI-tractable (fast win) · 7 needs-human. The PR queue skews
 heavily toward "needs human" because the small/easy ones get merged quickly — what's
@@ -528,8 +528,8 @@ decisions that only the team can make.
 ## 8. Suggested retreat schedule sketch
 
 - **Day 1 AM**: Triage session — walk through §5/§6 as a group, assign owners, close
-  what's dead (#159, and re-triage #125/#83/#20), merge the fast win (#276), decide
-  what to do with #379/#409/#397 given their merge-conflict state.
+  what's dead ([#159](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/159), and re-triage [#125](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/125)/[#83](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/83)/[#20](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/20)), merge the fast win ([#276](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/276)), decide
+  what to do with [#379](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/379)/[#409](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/409)/[#397](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/397) given their merge-conflict state.
 - **Day 1 PM – Day 2**: P0 items (§2) — coverage scaffolding for `eos`/`gw`/`mlmodel`/
   `population`/`mpi_setup.py`, the two concrete bug fixes, bare-except and doc fixes,
   tooling/CI-pin bumps. Good pairing exercise: human defines what a correct test
@@ -542,6 +542,6 @@ decisions that only the team can make.
 - **Day 4**: Work through P1 items and the agent-tractable issue list (§3.2/§5) in
   parallel — pair each person with an agent session tackling one mechanical item at
   a time, human reviews before merge.
-- **Day 5**: Wrap-up — decide the 1.1 release scope (#429) now that the blockers
-  above are visible, write release notes/changelog policy (#183/#184), retro on what
+- **Day 5**: Wrap-up — decide the 1.1 release scope ([#429](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/429)) now that the blockers
+  above are visible, write release notes/changelog policy ([#183](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/183)/[#184](https://github.com/nuclear-multimessenger-astronomy/nmma/issues/184)), retro on what
   worked.
