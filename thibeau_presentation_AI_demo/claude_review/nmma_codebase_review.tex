@@ -81,7 +81,7 @@ done at the retreat to corroborate and extend \S4.2.
   path used whenever \code{USE\_MPI and sampler == 'dynesty'}) also has zero
   coverage --- exactly the kind of ordering-sensitive distributed code that
   regresses silently. The maintainers already know part of this --- issue
-  \textbf{\#196 ``Tests for nmma/eos''} and \textbf{\#299 ``Joint analysis unit
+  \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/196}{\#196} ``Tests for nmma/eos''} and \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/299}{\#299} ``Joint analysis unit
   test''} have been open since \textbf{2023-08} and \textbf{2024-01} respectively.
 
 \item \textbf{\code{nmma/tests/models.py} is entirely \code{pytest.mark.skip}'d}
@@ -172,8 +172,8 @@ done at the retreat to corroborate and extend \S4.2.
   content only. \code{doc/models.md} links to a stale line-anchor in
   \code{nmma/em/model.py} (points at line 72; actual content is now $\sim$97--125)
   --- model names themselves are still accurate, only the link target drifted.
-  Further drift: issues \textbf{\#374}, \textbf{\#307}, \textbf{\#213}/\textbf{\#136},
-  and doc pages tied to the still-open \textbf{\#388} design question.
+  Further drift: issues \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/374}{\#374}}, \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/307}{\#307}}, \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/213}{\#213}}/\textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/136}{\#136}},
+  and doc pages tied to the still-open \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/388}{\#388}} design question.
 
 \item \textbf{Tooling/CI pins are stale and inconsistent.}
   \code{.pre-commit-config.yaml} pins \code{black==22.3.0} (current stable is
@@ -185,7 +185,7 @@ done at the retreat to corroborate and extend \S4.2.
   branch --- a supply-chain risk specifically in the \emph{publish} workflow), plus
   \code{actions/setup-python@v3} (current is v5).
 
-\item \textbf{PR queue has two multi-megabyte-diff PRs} (\#105, \#82: +3.3M lines
+\item \textbf{PR queue has two multi-megabyte-diff PRs} (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/105}{\#105}, \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/82}{\#82}: +3.3M lines
   each) sitting open since June 2023 --- almost certainly stale branches with
   binary/pickle files being diffed as text (no \code{.gitattributes} rule stops
   this). A \code{.gitattributes} rule (e.g. \code{*.pkl -diff -text},
@@ -225,7 +225,7 @@ done at the retreat to corroborate and extend \S4.2.
 \item Stand up \textbf{coverage-gated CI} for \code{eos/}, \code{gw/},
   \code{mlmodel/}, \code{population/}, \code{post\_processing/}, and
   \code{core/mpi\_setup.py} --- even one smoke test per module raises the floor.
-  (Ties to \#196, \#299.)
+  (Ties to \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/196}{\#196}, \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/299}{\#299}.)
 \item Delete or replace \code{nmma/tests/models.py} --- a fully-skipped test file
   is worse than no file.
 \item Fix the two concrete latent bugs: the \code{base.py} \code{constraints}
@@ -256,11 +256,11 @@ done at the retreat to corroborate and extend \S4.2.
   prioritizing the two densest clusters (\code{joint/injection\_handling.py},
   \code{em/model.py}).
 \item Sweep the 106 stray \code{print()} calls into existing loggers.
-\item Close or rebase the two mega-diff stale PRs (\#105, \#82).
+\item Close or rebase the two mega-diff stale PRs (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/105}{\#105}, \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/82}{\#82}).
 \item Resolve version-key duplication: \code{distance} vs
-  \code{luminosity\_distance} (\#375).
-\item Decide and document a \textbf{versioning/release policy} (\#183, \#429,
-  \#184) --- blocked partly by \#335 and \#382.
+  \code{luminosity\_distance} (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/375}{\#375}).
+\item Decide and document a \textbf{versioning/release policy} (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/183}{\#183}, \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/429}{\#429},
+  \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/184}{\#184}) --- blocked partly by \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/335}{\#335} and \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/382}{\#382}.
 \item Reconcile CLI docs against \code{[project.scripts]} (18 entry points, 7
   never invoked in any test); fix \code{doc/models.md}'s stale line anchor.
 \item Decide the long-term status of \code{nmma/mlmodel/} (maintain-with-tests vs.
@@ -270,15 +270,15 @@ done at the retreat to corroborate and extend \S4.2.
 \subsection*{P2 --- track for next cycle (larger, needs design time)}
 \begin{enumerate}
 \setcounter{enumi}{14}
-\item Resolve \code{core\_model\_name} design ambiguity (\#388).
+\item Resolve \code{core\_model\_name} design ambiguity (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/388}{\#388}).
 \item Decouple training/analysis code from the pinned TensorFlow version ceiling
-  (\#335, \#334), and address poor training results on the new grid (\#301).
-\item Redesign \code{gwem\_resampling}'s KDE/approximation scheme (\#78).
+  (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/335}{\#335}, \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/334}{\#334}), and address poor training results on the new grid (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/301}{\#301}).
+\item Redesign \code{gwem\_resampling}'s KDE/approximation scheme (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/78}{\#78}).
 \item Add a schema/version check to the \code{*\_dump.pickle} inter-process
   contract between \code{nmma-generation} and \code{nmma-analysis}.
-\item Consider adding a \code{conda}-first \code{environment.yml} (\#206).
+\item Consider adding a \code{conda}-first \code{environment.yml} (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/206}{\#206}).
 \item Investigate the long-standing dynesty/ultranest indefinite-hang bug
-  (\#202).
+  (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/202}{\#202}).
 \end{enumerate}
 
 \section{Split by who should do it}
@@ -294,7 +294,7 @@ break/deprecate an API --- not appropriate to hand to an AI agent unsupervised.
   questions, not code bugs.
 \item \code{nmma/em/lightcurve\_generation.py:145} --- whether the $(1+z)$ vs
   $(1+z)^2$ bolometric luminosity correction is right.
-\item Decide the fate of \code{core\_model\_name} (\#388).
+\item Decide the fate of \code{core\_model\_name} (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/388}{\#388}).
 \item Decide the long-term status of \code{nmma/mlmodel/} (maintain vs.
   deprecate).
 \item Redesign or explicitly accept
@@ -302,29 +302,29 @@ break/deprecate an API --- not appropriate to hand to an AI agent unsupervised.
   currently is.
 \item Decide on a schema/versioning strategy for the \code{*\_dump.pickle}
   inter-process contract.
-\item Versioning/release policy (\#183, \#429, \#184) and what ``NMMA 1.1'' should
+\item Versioning/release policy (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/183}{\#183}, \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/429}{\#429}, \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/184}{\#184}) and what ``NMMA 1.1'' should
   contain.
-\item TensorFlow version ceiling (\#335) and training-quality regression (\#301,
-  \#302) --- require actually re-validating training code, a nontrivial
+\item TensorFlow version ceiling (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/335}{\#335}) and training-quality regression (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/301}{\#301},
+  \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/302}{\#302}) --- require actually re-validating training code, a nontrivial
   numerical-behavior check.
-\item Redesign of \code{gwem\_resampling}'s KDE scheme (\#78) and the sequential
-  Bayesian Hubble-constant update (\#100) --- statistical methodology decisions.
-\item Deciding what to do with the two mega-diff stale PRs (\#105, \#82) and the
-  2023-era draft PR (\#215).
+\item Redesign of \code{gwem\_resampling}'s KDE scheme (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/78}{\#78}) and the sequential
+  Bayesian Hubble-constant update (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/100}{\#100}) --- statistical methodology decisions.
+\item Deciding what to do with the two mega-diff stale PRs (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/105}{\#105}, \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/82}{\#82}) and the
+  2023-era draft PR (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/215}{\#215}).
 \item Deciding which of the $\sim$50--65 \code{FIXME}s represent real physics bugs
   vs. acceptable approximations.
 \item Coverage strategy for \code{eos/}/\code{gw/}/\code{mlmodel/}/
   \code{mpi\_setup.py} --- what counts as a meaningful test needs a domain expert.
 \item Population module correctness (\code{NeutronStarPopulation} only supports 2
   hardcoded distributions) --- generalizing is a design call.
-\item The \code{richpool} vs \code{schwimmbad} question (\#432, PR \#433) ---
+\item The \code{richpool} vs \code{schwimmbad} question (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/432}{\#432}, PR \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/433}{\#433}) ---
   touches the untested \code{mpi\_setup.py}; needs MPI validation expertise.
-\item The long-standing dynesty/ultranest indefinite-hang bug (\#202) --- deep
+\item The long-standing dynesty/ultranest indefinite-hang bug (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/202}{\#202}) --- deep
   sampler-specific debugging.
-\item Milky-Way extinction law (G23) + SFD recalibration (\#426) --- a
+\item Milky-Way extinction law (G23) + SFD recalibration (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/426}{\#426}) --- a
   physics-correctness change to shipped results, needs expert sign-off.
-\item Reviewing/merging the three large, physics-adjacent open PRs: \#409 (RA/Dec
-  units fix, correctness-critical), \#397 (tensor-loading refactor), \#379 (new
+\item Reviewing/merging the three large, physics-adjacent open PRs: \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/409}{\#409} (RA/Dec
+  units fix, correctness-critical), \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/397}{\#397} (tensor-loading refactor), \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/379}{\#379} (new
   LANL1D model, now with merge conflicts, needs science review).
 \end{itemize}
 
@@ -348,33 +348,33 @@ These are good candidates to hand to an AI coding agent, with human review of th
   versions consistently.
 \item Write smoke tests for the untested pure-ish functions in
   \code{post\_processing/}, \code{eos/eos\_processing.py}, and
-  \code{core/mpi\_setup.py}. Directly matches \textbf{\#196}/\textbf{\#299} ---
+  \code{core/mpi\_setup.py}. Directly matches \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/196}{\#196}}/\textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/299}{\#299}} ---
   good agent-assignable tasks once a human specifies expected test cases.
 \item Fix arm64 install docs per the working recipe already given in
-  \textbf{\#374}.
-\item \textbf{\#375} deprecated-key cleanup --- the issue body already lists the
+  \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/374}{\#374}}.
+\item \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/375}{\#375}} deprecated-key cleanup --- the issue body already lists the
   exact files; final ``which key wins'' call is P1 human sign-off.
-\item \textbf{\#382} \code{Bu2022mv} model not found --- narrow, reproducible bug
+\item \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/382}{\#382}} \code{Bu2022mv} model not found --- narrow, reproducible bug
   report with a code snippet already in the issue.
-\item \textbf{\#357} timeshift dropped by \code{processData()} --- bounded bug,
+\item \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/357}{\#357}} timeshift dropped by \code{processData()} --- bounded bug,
   clear failure mode.
-\item \textbf{\#263} DOI-fetch 429 errors --- cache the Zenodo DOI lookup once
+\item \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/263}{\#263}} DOI-fetch 429 errors --- cache the Zenodo DOI lookup once
   instead of hitting the API from every MPI rank.
-\item \textbf{\#81} ``sample times double call'' --- remove the redundant
+\item \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/81}{\#81}} ``sample times double call'' --- remove the redundant
   \code{sample\_times} argument; redo small rather than resurrect the abandoned
-  PR \#82.
+  PR \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/82}{\#82}.
 \item Small doc cross-reference sweep: confirm every \code{[project.scripts]}
   entry point has a doc mention; fix \code{doc/models.md}'s stale line anchor.
 \item Mechanical first pass at missing docstrings in \code{nmma/core/base.py} and
   \code{nmma/joint/joint\_likelihood.py}.
-\item Additional narrowly-scoped issues with clear specs: \textbf{\#206} conda
-  \code{environment.yml}, \textbf{\#346} JSON lightcurves in example files,
-  \textbf{\#307} joint-analysis docs, \textbf{\#136} Zenodo quickstart docs,
-  \textbf{\#181} compatibility list, \textbf{\#188} \code{--debug} CLI flag,
-  \textbf{\#142} plot multiple models (\code{good first issue}, reference
-  implementation linked), \textbf{\#184} release-notes writing (once policy is
+\item Additional narrowly-scoped issues with clear specs: \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/206}{\#206}} conda
+  \code{environment.yml}, \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/346}{\#346}} JSON lightcurves in example files,
+  \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/307}{\#307}} joint-analysis docs, \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/136}{\#136}} Zenodo quickstart docs,
+  \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/181}{\#181}} compatibility list, \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/188}{\#188}} \code{--debug} CLI flag,
+  \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/142}{\#142}} plot multiple models (\code{good first issue}, reference
+  implementation linked), \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/184}{\#184}} release-notes writing (once policy is
   set).
-\item PR \textbf{\#276} (apptainer definition file) --- small, self-contained,
+\item PR \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/276}{\#276}} (apptainer definition file) --- small, self-contained,
   already sanity-checked; just needs a rebase/re-verify and merge.
 \end{itemize}
 
@@ -469,42 +469,42 @@ These are good candidates to hand to an AI coding agent, with human review of th
 \textbf{\#} & \textbf{Title} & \textbf{Age} & \textbf{Class.} & \textbf{Rationale} \\
 \midrule
 \endhead
-432 & Using richpool & 2026-08 & Needs human & Dependency-swap proposal for untested \code{mpi\_setup.py}; paired with PR \#433. \\[3pt]
-429 & NMMA 1.1 release? & 2026-07 & Needs human & Release/admin-rights process decision. \\[3pt]
-426 & Milky-Way extinction law (G23) + SFD recalibration & 2026-07 & Human (AI can draft) & Physics-correctness change to shipped results. \\[3pt]
-400 & \code{default\_prior} in \code{InjectionCreator} & 2025-08 & Needs human & Blocked on upstream bilby/bilby\_pipe design decision. \\[3pt]
-388 & Remove reliance on \code{core\_model\_name} & 2024-11 & Needs human & API/design change to SVD model naming/loading. \\[3pt]
-382 & \code{Bu2022mv} not found in models list & 2024-08 & AI-tractable & Clear repro snippet already in the issue. \\[3pt]
-375 & Change deprecated key \code{distance}$\to$\code{luminosity\_distance} & 2024-08 & AI-tractable & Issue enumerates every file to change. \\[3pt]
-374 & Update docs for arm64 & 2024-08 & AI-tractable & Fix already given in the issue. \\[3pt]
-357 & Timeshift dropped by \code{processData()} & 2024-04 & AI-tractable & Bounded bug, clear failure mode. \\[3pt]
-346 & Add JSON lightcurves to example files & 2024-03 & AI-tractable & Simple additive task. \\[3pt]
-335 & Relax tensorflow version requirement & 2024-03 & Needs human & Requires re-validating training against newer TF. \\[3pt]
-307 & Joint analysis documentation & 2024-01 & AI-tractable & Pure doc-writing task. \\[3pt]
-302 & Auto-train tensorflow models on updated grids & 2024-01 & Needs human & New automation/infra feature. \\[3pt]
-301 & Poor tensorflow training results for new grid & 2024-01 & Needs human & ML/training-quality diagnosis. \\[3pt]
-299 & Joint analysis unit test & 2024-01 & AI-tractable & Matches a test-coverage gap in this audit. \\[3pt]
-263 & DOI not retrievable with too many processes & 2023-10 & AI-tractable & Concurrency bug, well-understood fix. \\[3pt]
-257 & Calculate chi2 between observation and grid & 2023-10 & Needs human & New feature, needs design decision on statistic. \\[3pt]
-213 & Zenodo initialization without an analysis & 2023-08 & Needs human & API-design decision. \\[3pt]
-206 & \code{environment.yml} for conda & 2023-08 & AI-tractable & Simple, self-contained. \\[3pt]
-203 & E(B-V) contribution in likelihood.py & 2023-08 & Needs human & Physics-modeling feature. \\[3pt]
-202 & dynesty/ultranest samplers hang indefinitely & 2023-08 & Needs human & Long-standing, hard sampler-hang bug. \\[3pt]
-196 & Tests for \code{nmma/eos} & 2023-08 & AI-tractable & Matches this audit's \#1 coverage gap. \\[3pt]
-188 & debug flag & 2023-08 & AI-tractable & Small, scoped CLI feature. \\[3pt]
-184 & Release Notes for Version changes & 2023-07 & AI-tractable & Doc/process writing (once policy set). \\[3pt]
-183 & Versioning schema & 2023-07 & Needs human & Policy decision. \\[3pt]
-181 & Add compatibility list to documentation & 2023-07 & AI-tractable & Doc addition. \\[3pt]
-159 & Move \code{best\_fit.json} into result JSON & 2023-07 & Stale (\code{wontfix}) & Already tagged; needs closing. \\[3pt]
-142 & Plot multiple models onto fit lightcurve & 2023-06 & AI-tractable & \code{good first issue}, reference linked. \\[3pt]
-139 & Strategy for adding models & 2023-06 & Needs human & Process/governance discussion. \\[3pt]
-136 & Zenodo quickstart docs & 2023-06 & AI-tractable & Doc-writing task. \\[3pt]
-125 & \code{svdmodel\_benchmark} multiprocessing bug & 2023-06 & Stale, triage & 3+ years old, unclear relevance. \\[3pt]
-100 & Sequential Bayesian update for Hubble constant & 2023-06 & Needs human & Statistical-method design question. \\[3pt]
-83 & Additional filter enforcement & 2023-05 & Stale, triage & Old, thin description. \\[3pt]
-81 & Sample times double call & 2023-04 & Needs human & Abandoned PR \#82 attempt; needs maintainer decision on approach. \\[3pt]
-78 & Improve \code{gwem\_resampling} & 2023-03 & Needs human & Vague scope, needs statistical design decision. \\[3pt]
-20 & Sampler parameter tuning & 2022-04 & Stale, triage & Very old, likely superseded by \#202. \\
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/432}{432} & Using richpool & 2026-08 & Needs human & Dependency-swap proposal for untested \code{mpi\_setup.py}; paired with PR \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/433}{\#433}. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/429}{429} & NMMA 1.1 release? & 2026-07 & Needs human & Release/admin-rights process decision. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/426}{426} & Milky-Way extinction law (G23) + SFD recalibration & 2026-07 & Human (AI can draft) & Physics-correctness change to shipped results. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/400}{400} & \code{default\_prior} in \code{InjectionCreator} & 2025-08 & Needs human & Blocked on upstream bilby/bilby\_pipe design decision. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/388}{388} & Remove reliance on \code{core\_model\_name} & 2024-11 & Needs human & API/design change to SVD model naming/loading. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/382}{382} & \code{Bu2022mv} not found in models list & 2024-08 & AI-tractable & Clear repro snippet already in the issue. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/375}{375} & Change deprecated key \code{distance}$\to$\code{luminosity\_distance} & 2024-08 & AI-tractable & Issue enumerates every file to change. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/374}{374} & Update docs for arm64 & 2024-08 & AI-tractable & Fix already given in the issue. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/357}{357} & Timeshift dropped by \code{processData()} & 2024-04 & AI-tractable & Bounded bug, clear failure mode. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/346}{346} & Add JSON lightcurves to example files & 2024-03 & AI-tractable & Simple additive task. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/335}{335} & Relax tensorflow version requirement & 2024-03 & Needs human & Requires re-validating training against newer TF. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/307}{307} & Joint analysis documentation & 2024-01 & AI-tractable & Pure doc-writing task. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/302}{302} & Auto-train tensorflow models on updated grids & 2024-01 & Needs human & New automation/infra feature. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/301}{301} & Poor tensorflow training results for new grid & 2024-01 & Needs human & ML/training-quality diagnosis. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/299}{299} & Joint analysis unit test & 2024-01 & AI-tractable & Matches a test-coverage gap in this audit. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/263}{263} & DOI not retrievable with too many processes & 2023-10 & AI-tractable & Concurrency bug, well-understood fix. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/257}{257} & Calculate chi2 between observation and grid & 2023-10 & Needs human & New feature, needs design decision on statistic. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/213}{213} & Zenodo initialization without an analysis & 2023-08 & Needs human & API-design decision. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/206}{206} & \code{environment.yml} for conda & 2023-08 & AI-tractable & Simple, self-contained. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/203}{203} & E(B-V) contribution in likelihood.py & 2023-08 & Needs human & Physics-modeling feature. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/202}{202} & dynesty/ultranest samplers hang indefinitely & 2023-08 & Needs human & Long-standing, hard sampler-hang bug. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/196}{196} & Tests for \code{nmma/eos} & 2023-08 & AI-tractable & Matches this audit's \#1 coverage gap. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/188}{188} & debug flag & 2023-08 & AI-tractable & Small, scoped CLI feature. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/184}{184} & Release Notes for Version changes & 2023-07 & AI-tractable & Doc/process writing (once policy set). \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/183}{183} & Versioning schema & 2023-07 & Needs human & Policy decision. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/181}{181} & Add compatibility list to documentation & 2023-07 & AI-tractable & Doc addition. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/159}{159} & Move \code{best\_fit.json} into result JSON & 2023-07 & Stale (\code{wontfix}) & Already tagged; needs closing. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/142}{142} & Plot multiple models onto fit lightcurve & 2023-06 & AI-tractable & \code{good first issue}, reference linked. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/139}{139} & Strategy for adding models & 2023-06 & Needs human & Process/governance discussion. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/136}{136} & Zenodo quickstart docs & 2023-06 & AI-tractable & Doc-writing task. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/125}{125} & \code{svdmodel\_benchmark} multiprocessing bug & 2023-06 & Stale, triage & 3+ years old, unclear relevance. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/100}{100} & Sequential Bayesian update for Hubble constant & 2023-06 & Needs human & Statistical-method design question. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/83}{83} & Additional filter enforcement & 2023-05 & Stale, triage & Old, thin description. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/81}{81} & Sample times double call & 2023-04 & Needs human & Abandoned PR \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/82}{\#82} attempt; needs maintainer decision on approach. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/78}{78} & Improve \code{gwem\_resampling} & 2023-03 & Needs human & Vague scope, needs statistical design decision. \\[3pt]
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/20}{20} & Sampler parameter tuning & 2022-04 & Stale, triage & Very old, likely superseded by \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/202}{\#202}. \\
 \bottomrule
 \end{longtable}
 \endgroup
@@ -521,31 +521,31 @@ stale/needs-triage-first (including 1 already \code{wontfix}).
 \textbf{PR} & \textbf{Title} & \textbf{Size} & \textbf{Status} & \textbf{Recommendation} \\
 \midrule
 \endhead
-\#433 & use richpool interface & tiny (+5/-5) & mergeable, review required &
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/433}{\#433} & use richpool interface & tiny (+5/-5) & mergeable, review required &
   Touches untested \code{mpi\_setup.py}; author asks for help validating it works.
   \textbf{Needs human.} \\[4pt]
-\#409 & Fix radec units & large (69 files, +2366/-1539) & conflicting, review
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/409}{\#409} & Fix radec units & large (69 files, +2366/-1539) & conflicting, review
   required & Physics-critical correctness fix, wide blast radius, needs rebase.
   \textbf{Needs human.} \\[4pt]
-\#397 & Generalizing Light Curve to Tensor Loading & medium (5 files, +596/-395) &
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/397}{\#397} & Generalizing Light Curve to Tensor Loading & medium (5 files, +596/-395) &
   conflicting, stale since Jul 2025 & Substantial refactor, needs design opinion
   and conflict resolution. \textbf{Needs human.} \\[4pt]
-\#379 & LANL1D model addition & small (+37/-2) & conflicting, previously approved &
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/379}{\#379} & LANL1D model addition & small (+37/-2) & conflicting, previously approved &
   New physics model; needs science review, has drifted into conflicts since
   approval. \textbf{Needs human} (not the pure fast win it once looked like). \\[4pt]
-\#276 & add apptainer definition file & tiny (+25/-0) & mergeable, review required &
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/276}{\#276} & add apptainer definition file & tiny (+25/-0) & mergeable, review required &
   Small, self-contained, already sanity-checked by author. \textbf{AI-tractable /
   fast win.} \\[4pt]
-\#215 & multi\_model\_analysis command & draft, conflicting, small (+29/-0) &
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/215}{\#215} & multi\_model\_analysis command & draft, conflicting, small (+29/-0) &
   stale since Sep 2023 & Needs design review of interaction with existing
   multi-model support. \textbf{Needs human.} \\[4pt]
-\#105 & Remove old Bu2019lm pickle / install updates & draft, conflicting,
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/105}{\#105} & Remove old Bu2019lm pickle / install updates & draft, conflicting,
   \textbf{+3.38M/-4.8k lines, 222 files} & stale since Jun 2023 & Binary/pickle
   files likely diffed as text; needs a maintainer to assess before review is even
   possible. \textbf{Needs human --- close or rebase from scratch.} \\[4pt]
-\#82 & removed sample\_times arg in generate\_lightcurve & conflicting,
-  +3.37M/-2.6k lines, 205 files & stale since Jun 2023 & Same red flag as \#105;
-  not all call sites validated. Maps to issue \textbf{\#81} --- intent still
+\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/82}{\#82} & removed sample\_times arg in generate\_lightcurve & conflicting,
+  +3.37M/-2.6k lines, 205 files & stale since Jun 2023 & Same red flag as \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/105}{\#105};
+  not all call sites validated. Maps to issue \textbf{\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/81}{\#81}} --- intent still
   valid, worth redoing small. \textbf{Needs human to decide close/redo; the redo
   itself is AI-tractable.} \\
 \bottomrule
@@ -596,8 +596,8 @@ only the team can make.
 
 \begin{itemize}
 \item \textbf{Day 1 AM}: Triage session --- walk through \S5/\S6 as a group, assign
-  owners, close what's dead (\#159, re-triage \#125/\#83/\#20), merge the fast win
-  (\#276), decide what to do with \#379/\#409/\#397 given their merge-conflict state.
+  owners, close what's dead (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/159}{\#159}, re-triage \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/125}{\#125}/\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/83}{\#83}/\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/20}{\#20}), merge the fast win
+  (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/276}{\#276}), decide what to do with \href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/379}{\#379}/\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/409}{\#409}/\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/397}{\#397} given their merge-conflict state.
 \item \textbf{Day 1 PM -- Day 2}: P0 items (\S2) --- coverage scaffolding for
   \code{eos}/\code{gw}/\code{mlmodel}/\code{population}/\code{mpi\_setup.py}, the
   two concrete bug fixes, bare-except and doc fixes, tooling/CI-pin bumps. Good
@@ -611,8 +611,8 @@ only the team can make.
 \item \textbf{Day 4}: Work through P1 items and the agent-tractable issue list
   (\S3.2/\S5) in parallel --- pair each person with an agent session tackling one
   mechanical item at a time, human reviews before merge.
-\item \textbf{Day 5}: Wrap-up --- decide the 1.1 release scope (\#429) now that the
-  blockers above are visible, write release notes/changelog policy (\#183/\#184),
+\item \textbf{Day 5}: Wrap-up --- decide the 1.1 release scope (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/429}{\#429}) now that the
+  blockers above are visible, write release notes/changelog policy (\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/183}{\#183}/\href{https://github.com/nuclear-multimessenger-astronomy/nmma/issues/184}{\#184}),
   retro on what worked.
 \end{itemize}
 
