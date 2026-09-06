@@ -56,16 +56,14 @@
 \textbf{Scope:} \code{nmma/} source tree, tests, docs, CI/lint config, and the live
 GitHub issue/PR tracker for \code{nuclear-multimessenger-astronomy/nmma}. Goal: give
 the team a prioritized, evidence-based punch list for a 1-week retreat, split by who
-should do the work. This report merges two independent passes over the codebase and
-issue tracker, so most findings were cross-checked twice; a couple of counts (e.g.
-the number of \code{FIXME} comments) differ slightly between the two passes
-depending on exactly what was grepped --- noted inline where relevant.
+should do the work. Findings are checked directly against the source; a few counts
+(e.g. the number of \code{FIXME} comments) are approximate since the exact number
+depends on the grep pattern used --- treat them as order-of-magnitude, not exact.
 
-\textbf{Caveat on one audit pass:} part of this review ran in a Python venv
-belonging to a \emph{different} project, so \code{healpy} and \code{flake8} weren't
-importable there and a live \code{flake8 --max-complexity 15} pass couldn't be run.
-All findings below come from static grep/read/\code{git log} inspection instead ---
-solid for locating problems, but a real \code{flake8} run in the actual \code{nmma}
+\textbf{Note:} findings below come from static grep/read/\code{git log} inspection
+rather than a live \code{flake8} run (\code{healpy} and \code{flake8} are not
+available in the environment used for this analysis). This is solid for locating
+problems, but running \code{flake8 --max-complexity 15} in the actual \code{nmma}
 dev env (\code{pip install -e ".[dev,grb,neuralnet]"}) should be the first thing
 done at the retreat to corroborate and extend \S4.2.
 
@@ -87,14 +85,14 @@ done at the retreat to corroborate and extend \S4.2.
 \item \textbf{\code{nmma/tests/models.py} is entirely \code{pytest.mark.skip}'d}
   (GitLab SVD download path retired) and never replaced with an equivalent test ---
   a whole test file is dead weight that silently reports 0 real coverage while
-  looking like it exists. Separately, \textbf{test collection was broken for 4 of
-  14 test modules} in one audit environment (\code{maximum\_mass.py},
-  \code{systematics.py}, \code{tools.py}, \code{training.py} all failed with
+  looking like it exists. Separately, \textbf{test collection breaks for 4 of
+  14 test modules when \code{healpy} isn't installed} (\code{maximum\_mass.py},
+  \code{systematics.py}, \code{tools.py}, \code{training.py} all fail with
   \code{ModuleNotFoundError: No module named 'healpy'}) --- this traces back to
   \code{nmma/em/\_\_init\_\_.py} eagerly importing the entire \code{em} submodule
   tree, so even a small, unrelated import drags in \code{healpy} and other
-  heavy/optional dependencies. Worth re-verifying in a correctly provisioned env,
-  but the coupling itself is real and worth loosening regardless.
+  heavy/optional dependencies. The failure is environment-dependent, but the import
+  coupling itself is real and worth loosening regardless.
 
 \item \textbf{Two concrete, currently-shipping bugs, both cheap to fix and both
   untested:}
@@ -112,8 +110,8 @@ done at the retreat to corroborate and extend \S4.2.
     construction time.
   \end{itemize}
 
-\item \textbf{$\sim$50--65 \code{FIXME}/\code{TODO} comments} (counts differ
-  slightly by grep pattern across the two audit passes), many self-flagged as
+\item \textbf{$\sim$50--65 \code{FIXME}/\code{TODO} comments} (exact count depends
+  on the grep pattern used --- treat as approximate), many self-flagged as
   broken or approximate: \code{nmma/em/lightcurve\_generation.py:145} questions its
   own redshift-correction exponent; \code{nmma/core/conversion.py:549} flags a
   physics inconsistency between BNS and NSBH GRB channels (``NSBH might produce a

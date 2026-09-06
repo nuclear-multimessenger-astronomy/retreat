@@ -5,17 +5,16 @@
 **Scope:** `nmma/` source tree, tests, docs, CI/lint config, and the live GitHub
 issue/PR tracker for `nuclear-multimessenger-astronomy/nmma`. Goal: give the team a
 prioritized, evidence-based punch list for a 1-week retreat, split by who should do
-the work. This report merges two independent passes over the codebase and issue
-tracker, so most findings were cross-checked twice; a couple of counts (e.g. the
-number of `FIXME` comments) differ slightly between the two passes depending on
-exactly what was grepped — noted inline where relevant.
+the work. Findings are checked directly against the source; a few counts (e.g. the
+number of `FIXME` comments) are approximate since the exact number depends on the
+grep pattern used — treat them as order-of-magnitude, not exact.
 
-**Caveat on one audit pass:** part of this review ran in a Python venv belonging to
-a *different* project, so `healpy` and `flake8` weren't importable there and a live
-`flake8 --max-complexity 15` pass couldn't be run. All findings below come from
-static grep/read/`git log` inspection instead — solid for locating problems, but a
-real `flake8` run in the actual `nmma` dev env (`pip install -e ".[dev,grb,neuralnet]"`)
-should be the first thing done at the retreat to corroborate and extend §4.2.
+**Note:** findings below come from static grep/read/`git log` inspection rather than
+a live `flake8` run (`healpy` and `flake8` are not available in the environment used
+for this analysis). This is solid for locating problems, but running
+`flake8 --max-complexity 15` in the actual `nmma` dev env
+(`pip install -e ".[dev,grb,neuralnet]"`) should be the first thing done at the
+retreat to corroborate and extend §4.2.
 
 ---
 
@@ -34,13 +33,13 @@ should be the first thing done at the retreat to corroborate and extend §4.2.
 2. **`nmma/tests/models.py` is entirely `pytest.mark.skip`'d** (GitLab SVD download
    path retired) and never replaced with an equivalent test — a whole test file is
    dead weight that silently reports 0 real coverage while looking like it exists.
-   Separately, **test collection was broken for 4 of 14 test modules** in one audit
-   environment (`maximum_mass.py`, `systematics.py`, `tools.py`, `training.py` all
-   failed with `ModuleNotFoundError: No module named 'healpy'`) — this traces back to
+   Separately, **test collection breaks for 4 of 14 test modules when `healpy` isn't
+   installed** (`maximum_mass.py`, `systematics.py`, `tools.py`, `training.py` all
+   fail with `ModuleNotFoundError: No module named 'healpy'`) — this traces back to
    `nmma/em/__init__.py` eagerly importing the entire `em` submodule tree, so even a
    small, unrelated import drags in `healpy` and other heavy/optional dependencies.
-   Worth re-verifying in a correctly provisioned env, but the coupling itself is real
-   and worth loosening regardless.
+   The failure is environment-dependent, but the import coupling itself is real and
+   worth loosening regardless.
 3. **Two concrete, currently-shipping bugs, both cheap to fix and both untested:**
    - `nmma/core/base.py`'s `constraints` setter (~lines 55–65): if `value` isn't a
      `PriorDict`, `Constraint`, or `dict`, the local `constr` variable is never
@@ -50,8 +49,8 @@ should be the first thing done at the retreat to corroborate and extend §4.2.
      handles `model_name in {'flat', 'peak'}`; any other value silently leaves
      `self.distribution` unset, surfacing later as a confusing `AttributeError` in
      `log_likelihood()` rather than a clear error at construction time.
-4. **~50–65 `FIXME`/`TODO` comments** (counts differ slightly by grep pattern across
-   the two audit passes), many self-flagged as broken or approximate:
+4. **~50–65 `FIXME`/`TODO` comments** (exact count depends on the grep pattern
+   used — treat as approximate), many self-flagged as broken or approximate:
    `nmma/em/lightcurve_generation.py:145` questions its own redshift-correction
    exponent; `nmma/core/conversion.py:549` flags a physics inconsistency between BNS
    and NSBH GRB channels ("NSBH might produce a GRB too, why not provide the same
