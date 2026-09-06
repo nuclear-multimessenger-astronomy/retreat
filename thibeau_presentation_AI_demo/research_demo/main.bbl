@@ -48,6 +48,39 @@ Matteo Breschi, Rossella Gamba, and Sebastiano Bernuzzi.
   applications to gravitational waves}.
 \newblock {\em Phys. Rev. D}, 104(4):042001, 2021.
 
+\bibitem{Handley:2015vkr}
+W.~J. Handley, M.~P. Hobson, and A.~N. Lasenby.
+\newblock {polychord: next-generation nested sampling}.
+\newblock {\em Mon. Not. Roy. Astron. Soc.}, 453(4):4385--4399, 2015.
+
+\bibitem{Williams:2021qyt}
+Michael~J. Williams, John Veitch, and Chris Messenger.
+\newblock {Nested sampling with normalizing flows for gravitational-wave
+  inference}.
+\newblock {\em Phys. Rev. D}, 103(10):103006, 2021.
+
+\bibitem{Williams:2023ppp}
+Michael~J. Williams, John Veitch, and Chris Messenger.
+\newblock {Importance nested sampling with normalising flows}.
+\newblock {\em Mach. Learn. Sci. Tech.}, 4(3):035011, 2023.
+
+\bibitem{Guillochon:2017bmg}
+James Guillochon, Matt Nicholl, V.~Ashley Villar, Brenna Mockler, Gautham
+  Narayan, Kaisey~S. Mandel, Edo Berger, and Peter K.~G. Williams.
+\newblock {MOSFiT: Modular Open-Source Fitter for Transients}.
+\newblock {\em Astrophys. J. Suppl.}, 236(1):6, 2018.
+
+\bibitem{Karamanis:2021tsx}
+Minas Karamanis, Florian Beutler, and John~A. Peacock.
+\newblock {zeus: a python implementation of ensemble slice sampling for
+  efficient Bayesian parameter inference}.
+\newblock {\em Mon. Not. Roy. Astron. Soc.}, 508(3):3589--3603, 2021.
+
+\bibitem{Ashton:2021anp}
+Gregory Ashton and Colm Talbot.
+\newblock {B{\,}ilby-MCMC: an MCMC sampler for gravitational-wave inference}.
+\newblock {\em Mon. Not. Roy. Astron. Soc.}, 507(2):2037--2051, 2021.
+
 \bibitem{Breschi:2024qlc}
 Matteo Breschi, Rossella Gamba, Gregorio Carullo, Daniel Godzieba, Sebastiano
   Bernuzzi, Albino Perego, and David Radice.
@@ -95,12 +128,6 @@ Nikhil Sarin et~al.
   transients}.
 \newblock {\em Mon. Not. Roy. Astron. Soc.}, 531(1):1203--1227, 2024.
 
-\bibitem{Guillochon:2017bmg}
-James Guillochon, Matt Nicholl, V.~Ashley Villar, Brenna Mockler, Gautham
-  Narayan, Kaisey~S. Mandel, Edo Berger, and Peter K.~G. Williams.
-\newblock {MOSFiT: Modular Open-Source Fitter for Transients}.
-\newblock {\em Astrophys. J. Suppl.}, 236(1):6, 2018.
-
 \bibitem{Wong:2023lgb}
 Kaze W.~K. Wong, Maximiliano Isi, and Thomas D.~P. Edwards.
 \newblock {Fast Gravitational-wave Parameter Estimation without Compromises}.
@@ -132,17 +159,6 @@ Maximilian Dax, Stephen~R. Green, Jonathan Gair, Michael P{\"u}rrer, Jonas
   Inference}.
 \newblock {\em Phys. Rev. Lett.}, 130(17):171403, 2023.
 
-\bibitem{Williams:2021qyt}
-Michael~J. Williams, John Veitch, and Chris Messenger.
-\newblock {Nested sampling with normalizing flows for gravitational-wave
-  inference}.
-\newblock {\em Phys. Rev. D}, 103(10):103006, 2021.
-
-\bibitem{Williams:2023ppp}
-Michael~J. Williams, John Veitch, and Chris Messenger.
-\newblock {Importance nested sampling with normalising flows}.
-\newblock {\em Mach. Learn. Sci. Tech.}, 4(3):035011, 2023.
-
 \bibitem{Talbot:2019okv}
 Colm Talbot, Rory Smith, Eric Thrane, and Gregory~B. Poole.
 \newblock {Parallelized Inference for Gravitational-Wave Astronomy}.
@@ -166,6 +182,45 @@ Alicja Polanska, Thibeau Wouters, Peter T.~H. Pang, Kaze K.~W. Wong, and
   gravitational waves with normalizing flows}.
 \newblock In {\em {Postponed: Machine Learning and the Physical Sciences}:
   {Workshop at NeurIPS 2024}}, 10 2024.
+
+\bibitem{Gammal:2022eob}
+Jonas~El Gammal, Nils Sch{\"o}neberg, Jes{\'u}s Torrado, and Christian Fidler.
+\newblock {Fast and robust Bayesian inference using Gaussian processes with
+  GPry}.
+\newblock {\em JCAP}, 10:021, 2023.
+
+\bibitem{Lange:2018pyp}
+Jacob Lange, Richard O'Shaughnessy, and Monica Rizzo.
+\newblock {Rapid and accurate parameter inference for coalescing, precessing
+  compact binaries}.
+\newblock 5 2018.
+
+\bibitem{Mushkin:2025yks}
+Jonathan Mushkin, Javier Roulet, Barak Zackay, Tejaswi Venumadhav, Oryna
+  Ivashtenko, Digvijay Wadekar, Ajit~Kumar Mehta, and Matias Zaldarriaga.
+\newblock {Sampler-free gravitational wave inference using matrix
+  multiplication}.
+\newblock {\em Phys. Rev. D}, 112(10):104025, 2025.
+
+\bibitem{Roulet:2022kot}
+Javier Roulet, Seth Olsen, Jonathan Mushkin, Tousif Islam, Tejaswi Venumadhav,
+  Barak Zackay, and Matias Zaldarriaga.
+\newblock {Removing degeneracy and multimodality in gravitational wave source
+  parameters}.
+\newblock {\em Phys. Rev. D}, 106(12):123015, 2022.
+
+\bibitem{Roulet:2024hwz}
+Javier Roulet, Jonathan Mushkin, Digvijay Wadekar, Tejaswi Venumadhav, Barak
+  Zackay, and Matias Zaldarriaga.
+\newblock {Fast marginalization algorithm for optimizing gravitational wave
+  detection, parameter estimation, and sky localization}.
+\newblock {\em Phys. Rev. D}, 110(4):044010, 2024.
+
+\bibitem{Lange:2023ydq}
+Johannes~U. Lange.
+\newblock {nautilus: boosting Bayesian importance nested sampling with deep
+  learning}.
+\newblock {\em Mon. Not. Roy. Astron. Soc.}, 525(2):3181--3194, 2023.
 
 \bibitem{Torrado:2020dgo}
 Jesus Torrado and Antony Lewis.
